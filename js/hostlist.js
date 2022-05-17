@@ -1,5 +1,5 @@
 const STRAPI_IP = "http://localhost:1337/api/hosts"
-const hostlist = document.querySelector('.host-display')
+const hostlist = document.querySelector('main')
 
 // Création d'une fonction asynchrone
 async function callAPI() {
@@ -16,19 +16,18 @@ function creationCarte(host) {
         const carteHTML = `
         <a href="http://${host.data[i].attributes.ip}">
             <div class="card">
-                <p class="card-title">${host.data[i].attributes.name}</p>
-                <p class="card-ip">${host.data[i].attributes.ip}</p>
+                <p class="host-title">${host.data[i].attributes.name}</p>
+                <p class="host-ip">${host.data[i].attributes.ip}</p>
                 <p class="host-status">Chargement...</p>
-            
             </div>
         </a>
         `
 
         fetch(`http://${host.data[i].attributes.ip}`, {mode: 'no-cors'}).then(r=>{ // Si le serveur est joignable
-            document.querySelector('.host-status').innerText = "En ligne"
+            document.querySelectorAll('.host-status')[i].innerText = "En ligne"
             })
             .catch(e=>{ // Si le serveur n'est pas joignable
-                document.querySelector('.host-status').innerText = "Hors ligne"
+                document.querySelectorAll('.host-status')[i].innerText = "Hors ligne"
           })
 
         hostlist.innerHTML += carteHTML

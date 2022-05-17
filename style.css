@@ -94,6 +94,10 @@ a:hover, a:visited, a:link, a:active
     font-size: 32px;
 }
 
+.host-title {
+    font-size: 32px;
+}
+
 @media (max-width: 1400px) {
     main { grid-template-columns: repeat(5, 1fr); }
 }
