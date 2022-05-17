@@ -58,6 +58,31 @@ header {
     align-items: center;
 }
 
+/* Contenu principal de la page */
+main {
+    margin-top: 50px;
+    margin-left: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Tuile */
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+    background-color: #143058;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+}
+
+.card-value {
+    font-size: 32px;
+}
+
+/* Responsive pour la version mobile */
 @media all and (max-width: 991px)
 {
     nav
@@ -101,5 +126,14 @@ header {
 
     header {
         flex-direction: column;
+    }
+
+    main {
+        margin-left: 0px;
+    }
+
+    .card {
+        width: 100%;
+        border-radius: 0px;
     }
 }

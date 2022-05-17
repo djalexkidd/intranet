@@ -13,7 +13,8 @@ async function dataWeather() {
 // Affichage du widget météo
 function creationWidget(weather) {
     const carteHTML = `
-    <p>Température à Saint-James: ${weather.main.temp}°C</p>
+    <p class="card-title">Température à Saint-James</p>
+    <p class="card-value">${weather.main.temp}°C</p>
     `
 
     affichage.innerHTML = carteHTML
