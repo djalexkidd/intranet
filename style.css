@@ -63,6 +63,7 @@ header {
     nav
     {
         height: 60px;
+        z-index: 2;
     }
  
     nav .main_pages 
@@ -86,6 +87,7 @@ header {
         font-size: 40px;
         color: white;
         cursor: pointer;
+        margin-left: 15px;
     }
  
     #toggle:checked + .main_pages {
