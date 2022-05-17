@@ -97,6 +97,20 @@ a:hover, a:visited, a:link, a:active
     font-size: 32px;
 }
 
+.host-div {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.status-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: orange;
+}
+
 @media (max-width: 1400px) {
     main { grid-template-columns: repeat(5, 1fr); }
 }
