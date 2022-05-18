@@ -14,7 +14,7 @@ async function callAPI() {
 function creationCarte(host) {
     for(let i = 0; i < host.data.length; i++) {
         const carteHTML = `
-        <a href="http://${host.data[i].attributes.ip}">
+        <a href="http://${host.data[i].attributes.ip}" target="_blank">
             <div class="card">
                 <p class="host-title">${host.data[i].attributes.name}</p>
                 <p class="host-ip">${host.data[i].attributes.ip}</p>
