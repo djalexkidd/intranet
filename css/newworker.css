@@ -58,6 +58,12 @@ header {
     align-items: center;
 }
 
+main {
+    font-size: 32px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
 /* Boîte contenant le formulaire */
 .container {
     display: flex;
@@ -68,7 +74,6 @@ header {
     color: white;
     margin: 20px auto;
     font-size: 24px;
-    font-family: Arial, sans-serif;
 }
 
 /* Bouton pour envoyer */
