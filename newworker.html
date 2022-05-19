@@ -31,10 +31,46 @@
     <main>
         <div class="container">
             <form>
-                <p>Nom</p>
-                <input class="name" required>
-                <p>E-mail</p>
-                <input class="email" type="email" required>
+                <div class="option-component form-space">
+                    <p>Nom:</p>
+                    <input class="name" required>
+                </div>
+
+                <div class="option-component form-space">
+                    <p class="spacing">E-mail:</p>
+                    <input class="email" type="email" required>
+                </div>
+
+                <div class="option-component form-space">
+                    <input type="radio" name="1">
+                    <p>Personne indirecte</p>
+                </div>
+
+                <div class="option-component form-space">
+                    <input type="radio" name="1">
+                    <p>Personne directe</p>
+                </div>
+
+                <div class="option-component form-space">
+                    <input type="checkbox">
+                    <p>Adresse mail</p>
+                </div>
+
+                <div class="option-component form-space">
+                    <input type="checkbox">
+                    <p>PC / Portable</p>
+                </div>
+
+                <div class="option-component form-space">
+                    <input type="checkbox">
+                    <p>Téléphone fixe</p>
+                </div>
+
+                <div class="option-component form-space">
+                    <input type="checkbox">
+                    <p>Téléphone mobile</p>
+                </div>
+
                 <input class="sendform" type="submit" value="Envoyer" />
             </form>
         </div>
