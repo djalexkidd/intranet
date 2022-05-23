@@ -105,6 +105,10 @@ form {
     margin-bottom: 30px;
 }
 
+.hardware-lend {
+    display: none;
+}
+
 /* Responsive pour la version mobile */
 @media all and (max-width: 991px)
 {
