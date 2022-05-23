@@ -1,0 +1,27 @@
+{
+  "name": "intranet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "concurrently \"node app.js\" \"cd strapi/ && NODE_ENV=production npm start\"",
+    "develop": "concurrently \"nodemon app.js\" \"cd strapi/ && npm run develop\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djalexkidd/intranet.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/djalexkidd/intranet/issues"
+  },
+  "homepage": "https://github.com/djalexkidd/intranet#readme",
+  "dependencies": {
+    "concurrently": "^7.2.1",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16"
+  }
+}
