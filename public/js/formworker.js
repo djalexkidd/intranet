@@ -1,4 +1,4 @@
-const radio = document.getElementsByName('1')
+const radio = document.getElementsByName('persontype')
 const inputContainer = document.querySelector('.hardware-lend')
 
 for (var i = 0; i < radio.length; ++i) {

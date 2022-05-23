@@ -31,46 +31,46 @@
     <main>
         <p>Nouveau salarié</p>
         <div class="container">
-            <form>
+            <form action="http://localhost:3000/form" method="post">
                 <div class="option-component">
                     <p>Nom:</p>
-                    <input class="name" required>
+                    <input name="lastname" required>
                 </div>
 
                 <div class="option-component">
                     <p>Prénom:</p>
-                    <input class="surname" required>
+                    <input name="firstname" required>
                 </div>
 
                 <div class="option-component">
                     <p class="mobile-shrink">Date de naissance:</p>
-                    <input type="date" class="birth-date" required>
+                    <input type="date" name="birthdate" required>
                 </div>
 
                 <div class="option-component">
                     <p>Matricule:</p>
-                    <input class="matricule" required>
+                    <input name="matricule" required>
                 </div>
 
                 <div class="option-component">
                     <p>Service:</p>
-                    <input class="name" required>
+                    <input name="service" required>
                 </div>
 
                 <div class="option-component">
                     <p>Fonction:</p>
-                    <input class="name" required>
+                    <input name="fonction" required>
                 </div>
 
                 <div class="spacing"></div>
 
                 <div class="option-component">
-                    <input type="radio" name="1" value="indirecte" required>
+                    <input type="radio" name="persontype" value="indirecte" required>
                     <p>Personne indirecte</p>
                 </div>
 
                 <div class="option-component">
-                    <input type="radio" name="1" value="directe">
+                    <input type="radio" name="persontype" value="directe">
                     <p>Personne directe</p>
                 </div>
 
@@ -79,22 +79,22 @@
                 <div class="hardware-lend">
 
                 <div class="option-component">
-                    <input type="checkbox">
+                    <input type="checkbox" name="needMail" value="Adresse mail">
                     <p>Adresse mail</p>
                 </div>
 
                 <div class="option-component">
-                    <input type="checkbox">
+                    <input type="checkbox" name="needComputer">
                     <p>PC / Portable</p>
                 </div>
 
                 <div class="option-component">
-                    <input type="checkbox">
+                    <input type="checkbox" name="needPhone">
                     <p>Téléphone fixe</p>
                 </div>
 
                 <div class="option-component">
-                    <input type="checkbox">
+                    <input type="checkbox" name="needMobilePhone">
                     <p>Téléphone mobile</p>
                 </div>
 
