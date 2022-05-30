@@ -31,6 +31,11 @@ app.get("/form", (req, res) => {
     res.render('newworker.ejs');
 });
 
+// Page erreur 404
+app.get('*', function(req, res){
+    res.render('404.ejs');
+});
+
 // Envoi du formulaire à partir de la page web
 app.post("/form", async (req, res, next) => {
     const { lastname, firstname, birthdate, matricule, service, fonction, persontype, needMail, needComputer, needPhone, needMobilePhone } = req.body;
