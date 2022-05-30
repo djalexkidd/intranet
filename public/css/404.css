@@ -109,4 +109,8 @@ main {
     header {
         flex-direction: column;
     }
+
+    main img {
+        width: 100%;
+    }
 }
