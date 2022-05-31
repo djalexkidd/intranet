@@ -2,6 +2,14 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const mail = require("./mail")
+const ActiveDirectory = require('activedirectory2');
+const ad_config = { url: process.env.AD_SERVER,
+               baseDN: process.env.AD_BASEDN,
+               username: process.env.AD_USERNAME,
+               password: process.env.AD_PASSWORD }
+const ad = new ActiveDirectory(ad_config);
+
+const groupName = 'utilisateurs';
 
 const app = express();
 
@@ -29,6 +37,22 @@ app.get("/", (req, res) => {
 // Formulaire nouveau salarié
 app.get("/form", (req, res) => {
     res.render('newworker.ejs');
+});
+
+app.get('/ad', function(req, res){
+  ad.getUsersForGroup(groupName, function(err, users) {
+    if (err) {
+      console.log('ERROR: ' +JSON.stringify(err));
+      return;
+    }
+      
+    if (! users) console.log('Groupe: ' + groupName + ' non trouvé.');
+    else {
+      console.log(JSON.stringify(users));
+    }
+  });
+
+  res.send("OK")
 });
 
 // Page erreur 404
