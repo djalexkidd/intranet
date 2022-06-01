@@ -64,34 +64,14 @@ app.get('*', function(req, res){
 app.post("/form", async (req, res, next) => {
     const { lastname, firstname, birthdate, matricule, service, fonction, persontype, needMail, needComputer, needPhone, needMobilePhone } = req.body;
     try {
-      console.log(lastname)
-      console.log(firstname)
-      console.log(birthdate)
-      console.log(matricule)
-      console.log(service)
-      console.log(fonction)
-      console.log(`Personne ${persontype}`)
-      console.log(mail.isUndefined(needMail))
-      console.log(mail.isUndefined(needComputer))
-      console.log(mail.isUndefined(needPhone))
-      console.log(mail.isUndefined(needMobilePhone))
+      await mail.mainMail(lastname, firstname, birthdate, matricule, service, fonction, persontype, needMail, needComputer, needPhone, needMobilePhone);
       
       res.send("Formulaire envoyé avec succès!");
     } catch (error) {
       res.send("Échec de l'envoi");
+      console.log(error);
     }
 });
-
-// app.post("/form", async (req, res, next) => {
-//     const { lastname, firstname, birthdate, matricule, service, fonction, persontype, needMail, needComputer, needPhone, needMobilePhone } = req.body;
-//     try {
-//       await mainMail(lastname, firstname, birthdate, matricule, service, fonction, persontype, needMail, needComputer, needPhone, needMobilePhone);
-      
-//       res.send("Formulaire envoyé avec succès!");
-//     } catch (error) {
-//       res.send("Échec de l'envoi");
-//     }
-// });
 
 // Hébergement du serveur sur le port 3000
 app.listen(3000, () => console.log("Server is running!"));
