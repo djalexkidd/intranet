@@ -10,13 +10,32 @@ function isUndefined(element) {
   }
 }
 
+function isIndirectPerson(persontype, needMail, needComputer, needPhone, needMobilePhone) {
+  if (persontype === "indirecte") {
+    return `
+    <br>
+    <br>
+    Besoins:
+    <br>
+    Adresse mail: ${isUndefined(needMail)}
+    <br>
+    PC / Portable: ${isUndefined(needComputer)}
+    <br>
+    Téléphone fixe: ${isUndefined(needPhone)}
+    <br>
+    Téléphone mobile: ${isUndefined(needMobilePhone)}`
+  }
+  else {
+    return ""
+  }
+}
+
 // Fonction asynchrone pour l'envoi du formulaire
 module.exports = {
     mainMail: async function (lastname, firstname, birthdate, matricule, service, fonction, persontype, needMail, needComputer, needPhone, needMobilePhone) {
       const transporter = await nodeMail.createTransport({
         host: process.env.SMTP_SERVER,
         port: process.env.SMTP_PORT,
-        secure: true,
         auth: {
           user: process.env.SMTP_EMAIL,
           pass: process.env.SMTP_PASSWORD,
@@ -39,17 +58,7 @@ module.exports = {
           Fonction: ${fonction}
           <br>
           Personne ${persontype}
-          <br>
-          <br>
-          Besoins:
-          <br>
-          Adresse mail: ${isUndefined(needMail)}
-          <br>
-          PC / Portable: ${isUndefined(needComputer)}
-          <br>
-          Téléphone fixe: ${isUndefined(needPhone)}
-          <br>
-          Téléphone mobile: ${isUndefined(needMobilePhone)}`,
+          ${isIndirectPerson(persontype, needMail, needComputer, needPhone, needMobilePhone)}`,
       };
       try {
         await transporter.sendMail(mailOption);
