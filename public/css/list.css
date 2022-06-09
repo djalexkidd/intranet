@@ -1,0 +1,106 @@
+/* Aucune bordure */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Barre de navigation */
+nav 
+{
+    width: 100%;
+    height: 100px;
+    background: #143058;
+}
+
+nav .main_pages 
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* Liens des pages */
+nav .main_pages a 
+{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    text-decoration: none;
+    font-size: 32px;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+/* Change la couleur du bouton au survol */
+nav a:hover 
+{
+    background: #1f4c8c;
+}
+
+/* Cache le bouton hamburger sur la version de bureau*/
+label, #toggle
+{
+    display: none;
+}
+
+/* Logo du site */
+.logo {
+    height: 100px;
+    background-color: rgb(203, 203, 203);
+}
+
+/* En-tête */
+header {
+    display: flex;
+    align-items: center;
+}
+
+/* Responsive pour la version mobile */
+@media all and (max-width: 991px)
+{
+    nav
+    {
+        height: 60px;
+        z-index: 2;
+    }
+ 
+    nav .main_pages 
+    {
+        display: none;
+        flex-direction: column;
+        background: #143058;
+        height: 220px;
+    }
+ 
+    nav .main_pages a {
+        width: 100%;
+    }
+ 
+    label 
+    {
+        width: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 40px;
+        color: white;
+        cursor: pointer;
+        margin-left: 15px;
+    }
+ 
+    #toggle:checked + .main_pages {
+        display: flex;
+    }
+
+    .logo {
+        margin-bottom: 20px;
+        background-color: white;
+    }
+
+    header {
+        flex-direction: column;
+    }
+}

@@ -1,7 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const path = require("path");
-const mail = require("./mail")
+const mail = require("./mail");
+const cors = require('cors');
 const ActiveDirectory = require('activedirectory2');
 const ad_config = { url: process.env.AD_SERVER,
                baseDN: process.env.AD_BASEDN,
@@ -9,7 +10,7 @@ const ad_config = { url: process.env.AD_SERVER,
                password: process.env.AD_PASSWORD }
 const ad = new ActiveDirectory(ad_config);
 
-const groupName = 'utilisateurs';
+const groupName = process.env.AD_GROUPNAME;
 
 const app = express();
 
@@ -39,7 +40,8 @@ app.get("/form", (req, res) => {
     res.render('newworker.ejs');
 });
 
-app.get('/ad', function(req, res){
+// API pour l'Active Directory
+app.get('/ad', cors(), function(req, res){
   ad.getUsersForGroup(groupName, function(err, users) {
     if (err) {
       console.log('ERROR: ' +JSON.stringify(err));
@@ -49,10 +51,14 @@ app.get('/ad', function(req, res){
     if (! users) console.log('Groupe: ' + groupName + ' non trouvé.');
     else {
       console.log(JSON.stringify(users));
+      res.end(JSON.stringify(users))
     }
   });
+});
 
-  res.send("OK")
+// Liste des téléphones
+app.get('/list', function(req, res){
+    res.render("list.ejs");
 });
 
 // Page erreur 404
