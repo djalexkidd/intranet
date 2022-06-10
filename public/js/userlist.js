@@ -7,6 +7,10 @@ async function callAPI() {
     const data = await reponse.json()
     console.log(data)
 
+    data.sort(function(a, b) {
+        return a.cn > b.cn;
+    })
+
     creationCarte(data)
 }
 
