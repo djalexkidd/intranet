@@ -60,8 +60,14 @@ app.get('/ad', cors(), function(req, res){
 });
 
 // Liste des téléphones
-app.get('/list', function(req, res){
-    res.render("list.ejs");
+app.get('/list', async function(req, res){
+  const SERVER_IP = "http://localhost:3000/ad"
+  const reponse = await fetch(SERVER_IP)
+  const data = await reponse.json()
+
+  res.render("list.ejs", {
+    user: data
+  });
 });
 
 // Page erreur 404

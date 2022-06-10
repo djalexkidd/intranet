@@ -70,7 +70,7 @@ td, th {
     padding: 8px;
 }
   
-tbody:nth-child(even) {
+tr:nth-child(even) {
     background-color: #dddddd;
 }
 

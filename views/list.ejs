@@ -34,12 +34,18 @@
               <th>Nom</th>
               <th>E-mail</th>
               <th>Téléphone</th>
+              <% for(let i = 0; i < user.length; i++) { %>
+                <tr>
+                    <td><%= user[i].cn %></td>
+                    <td><%= user[i].userPrincipalName %></td>
+                    <td><%= user[i].telephoneNumber %></td>
+                </tr>
+              <% } %>
             </tr>
           </table>
     </main>
 
     <!-- SCRIPTS -->
-    <script src="js/userlist.js"></script>
     <script src="js/spin.js"></script>
 </body>
 </html>
