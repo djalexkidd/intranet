@@ -24,7 +24,7 @@ app.set('view engine', 'ejs');
 // Création d'une fonction asynchrone pour la météo
 async function dataWeather() {
     const APICALL = `https://api.openweathermap.org/data/2.5/weather?lat=48.5218&lon=-1.32629&units=metric&appid=${process.env.WEATHER_APIKEY}`
-    const reponse = await fetch(`${APICALL}`)
+    const reponse = await fetch(APICALL)
     const weather = await reponse.json()
     return `${weather.main.temp}°C`
 }
@@ -54,7 +54,7 @@ app.get('/ad', cors(), function(req, res){
     if (! users) console.log('Groupe: ' + groupName + ' non trouvé.');
     else {
       console.log(JSON.stringify(users));
-      res.end(JSON.stringify(users))
+      res.end(JSON.stringify(users.sort((a, b) => a.cn.localeCompare(b.cn))))
     }
   });
 });
