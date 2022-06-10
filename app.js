@@ -7,7 +7,10 @@ const ActiveDirectory = require('activedirectory2');
 const ad_config = { url: process.env.AD_SERVER,
                baseDN: process.env.AD_BASEDN,
                username: process.env.AD_USERNAME,
-               password: process.env.AD_PASSWORD }
+               password: process.env.AD_PASSWORD,
+               attributes: {
+                user: ['userPrincipalName', 'cn', 'telephoneNumber' ]
+              } }
 const ad = new ActiveDirectory(ad_config);
 
 const groupName = process.env.AD_GROUPNAME;

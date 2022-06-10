@@ -58,6 +58,22 @@ header {
     align-items: center;
 }
 
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+  
+tbody:nth-child(even) {
+    background-color: #dddddd;
+}
+
 /* Responsive pour la version mobile */
 @media all and (max-width: 991px)
 {

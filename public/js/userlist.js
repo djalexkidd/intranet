@@ -1,5 +1,5 @@
 const SERVER_IP = "http://localhost:3000/ad"
-const userlist = document.querySelector('main')
+const userlist = document.querySelector('table')
 
 // Création d'une fonction asynchrone
 async function callAPI() {
@@ -14,10 +14,11 @@ async function callAPI() {
 function creationCarte(user) {
     for(let i = 0; i < user.length; i++) {
         const carteHTML = `
-            <div class="card">
-                <p class="user-fullname">${user[i].cn}</p>
-                <p class="user-email">${user[i].userPrincipalName}</p>
-            </div>
+            <tr>
+              <td>${user[i].cn}</td>
+              <td>${user[i].userPrincipalName}</td>
+              <td>${user[i].telephoneNumber}</td>
+            </tr>
         `
 
         userlist.innerHTML += carteHTML
