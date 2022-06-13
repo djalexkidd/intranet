@@ -33,7 +33,9 @@ app.get("/", (req, res) => {
 
 // Formulaire nouveau salarié
 app.get("/form", (req, res) => {
-    res.render('newworker.ejs');
+    res.render("newworker.ejs", {
+      mailstatus: ""
+    });
 });
 
 // API pour l'Active Directory
@@ -74,9 +76,14 @@ app.post("/form", async (req, res, next) => {
     try {
       await mail.mainMail(lastname, firstname, birthdate, matricule, service, fonction, persontype, needMail, needComputer, needPhone, needMobilePhone);
       
-      res.send("Formulaire envoyé avec succès!");
+      res.render("newworker.ejs", {
+        mailstatus: "Formulaire envoyé avec succès"
+      });
     } catch (error) {
-      res.send("Échec de l'envoi");
+      res.render("newworker.ejs", {
+        mailstatus: "Échec de l'envoi"
+      });
+
       console.log(error);
     }
 });
