@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const mail = require("./mail");
+const weather = require("./weather")
 const cors = require('cors');
 const ActiveDirectory = require('activedirectory2');
 const ad_config = { url: process.env.AD_SERVER,
@@ -21,17 +22,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.set('view engine', 'ejs');
 
-// Création d'une fonction asynchrone pour la météo
-async function dataWeather() {
-    const APICALL = `https://api.openweathermap.org/data/2.5/weather?lat=48.5218&lon=-1.32629&units=metric&appid=${process.env.WEATHER_APIKEY}`
-    const reponse = await fetch(APICALL)
-    const weather = await reponse.json()
-    return `${weather.main.temp}°C`
-}
-
 // Page d'accueil
 app.get("/", (req, res) => {
-    dataWeather().then(temp => {
+    weather.dataWeather().then(temp => {
         res.render('index.ejs', {
             weather: temp
         });
