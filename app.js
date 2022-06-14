@@ -15,8 +15,6 @@ const ad_config = { url: process.env.AD_SERVER,
               } }
 const ad = new ActiveDirectory(ad_config);
 
-const groupName = process.env.AD_GROUPNAME;
-
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -41,7 +39,7 @@ app.get("/form", (req, res) => {
 
 // API pour l'Active Directory
 app.get('/ad', cors(), function(req, res){
-  ad.getUsersForGroup(groupName, function(err, users) {
+  ad.findUsers(false, function(err, users) {
     if (err) {
       console.log('ERROR: ' +JSON.stringify(err));
       return;
