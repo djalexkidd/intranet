@@ -5,6 +5,12 @@
     padding: 0;
 }
 
+/* Police d'écriture */
+@font-face {
+    font-family: 'Roboto';
+    src : url('../fonts/Roboto.ttf') format('truetype');
+}
+
 /* Barre de navigation */
 nav 
 {

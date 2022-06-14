@@ -8,12 +8,13 @@ Ce fichier explique le fonctionnement des répertoires et fichiers du dépôt.
 ├── .env.example        --- Fichier de configuration d'exemple
 ├── app.js              --- Éxécutable JavaScript
 ├── doc                 --- Documentation du projet
-├── mail.js
-├── node_modules        --- Modules NodeJS
-├── package.json
+├── features            --- Fonctionnalités séparés
+├── node_modules        --- Dépendances NodeJS
+├── package.json        --- Métadonnées et infos dépendances
 ├── package-lock.json
 ├── public              --- Assets des pages web
 │   ├── css             --- Feuilles de styles
+│   ├── fonts           --- Polices d'écritures
 │   ├── img             --- Images
 │   └── js              --- Scripts JavaScript
 ├── README.md

@@ -1,9 +1,9 @@
 require("dotenv").config();
 const express = require("express");
 const path = require("path");
-const mail = require("./mail");
-const weather = require("./weather")
-const about = require("./about")
+const mail = require("./features/mail");
+const weather = require("./features/weather")
+const about = require("./features/about")
 const cors = require('cors');
 const ActiveDirectory = require('activedirectory2');
 const ad_config = { url: process.env.AD_SERVER,
