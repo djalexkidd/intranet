@@ -1,12 +1,11 @@
 {
   "name": "intranet",
-  "version": "1.0.0",
+  "version": "2022.01",
   "description": "",
   "main": "app.js",
   "scripts": {
     "start": "concurrently \"node app.js\" \"cd strapi/ && NODE_ENV=production npm start\"",
-    "develop": "concurrently \"nodemon app.js\" \"cd strapi/ && npm run develop\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "develop": "concurrently \"nodemon app.js\" \"cd strapi/ && npm run develop\""
   },
   "repository": {
     "type": "git",
@@ -14,7 +13,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/djalexkidd/intranet/issues"
   },

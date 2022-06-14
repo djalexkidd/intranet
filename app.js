@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 const mail = require("./mail");
 const weather = require("./weather")
+const about = require("./about")
 const cors = require('cors');
 const ActiveDirectory = require('activedirectory2');
 const ad_config = { url: process.env.AD_SERVER,
@@ -62,6 +63,15 @@ app.get('/list', async function(req, res){
 
   res.render("list.ejs", {
     user: data
+  });
+});
+
+// Page à propos
+app.get("/about", (req, res) => {
+  res.render("about.ejs", {
+    nodever: about.getProjectInfo([0]),
+    version: about.getProjectInfo([1]),
+    operatingsystem: about.getProjectInfo([2])
   });
 });
 
