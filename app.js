@@ -1,10 +1,14 @@
 require("dotenv").config();
 const express = require("express");
 const path = require("path");
+
+// Importation des fonctionnalités du site
 const mail = require("./features/mail");
 const lendmail = require("./features/lend_mail");
 const weather = require("./features/weather")
 const about = require("./features/about")
+
+// Configuration de l'Active Directory
 const cors = require('cors');
 const ActiveDirectory = require('activedirectory2');
 const ad_config = { url: process.env.AD_SERVER,
@@ -26,7 +30,7 @@ app.set('view engine', 'ejs');
 app.get("/", (req, res) => {
     weather.dataWeather().then(temp => {
         res.render('index.ejs', {
-            weather: temp
+            weather: temp // Température à Saint-James
         });
     })
 });
@@ -39,7 +43,7 @@ app.get("/form", (req, res) => {
 });
 
 // Formulaire prêt de matériel
-app.get("/lend", async function(req, res) {
+app.get("/lend", async (req, res) => {
   const SERVER_IP = "http://localhost:3000/ad"
   const reponse = await fetch(SERVER_IP)
   const data = await reponse.json()
@@ -51,22 +55,22 @@ app.get("/lend", async function(req, res) {
 });
 
 // API pour l'Active Directory
-app.get('/ad', cors(), function(req, res){
+app.get('/ad', cors(), (req, res) => {
   ad.findUsers(false, function(err, users) {
-    if (err) {
+    if (err) { // Si échoue
       console.log('ERROR: ' +JSON.stringify(err));
       return;
     }
       
-    if (! users) console.log('Groupe: ' + groupName + ' non trouvé.');
+    if (! users) console.log("Aucun utilisateur n'a été trouvé."); // Si aucun utilisateur (OU incorrecte ?)
     else {
-      res.end(JSON.stringify(users.sort((a, b) => a.cn.localeCompare(b.cn))))
+      res.end(JSON.stringify(users.sort((a, b) => a.cn.localeCompare(b.cn)))) // Envoie la liste par ordre alphabétique
     }
   });
 });
 
 // Liste des téléphones
-app.get('/list', async function(req, res){
+app.get('/list', async (req, res) => {
   const SERVER_IP = "http://localhost:3000/ad"
   const reponse = await fetch(SERVER_IP)
   const data = await reponse.json()
@@ -79,22 +83,22 @@ app.get('/list', async function(req, res){
 // Page à propos
 app.get("/about", (req, res) => {
   res.render("about.ejs", {
-    nodever: about.getProjectInfo([0]),
-    version: about.getProjectInfo([1]),
-    operatingsystem: about.getProjectInfo([2])
+    nodever: about.getProjectInfo([0]), // Version de Node.JS
+    version: about.getProjectInfo([1]), // Version du site
+    operatingsystem: about.getProjectInfo([2]) // Système d'exploitation du serveur
   });
 });
 
 // Page erreur 404
-app.get('*', function(req, res){
+app.get('*', (req, res) => {
     res.render('404.ejs');
 });
 
-// Envoi du formulaire à partir de la page web
+// Envoi du formulaire nouveau salarié à partir de la page web
 app.post("/form", async (req, res, next) => {
-    const { lastname, firstname, birthdate, matricule, service, fonction, persontype, needMail, needComputer, needPhone, needMobilePhone } = req.body;
+    const { lastname, firstname, birthdate, matricule, service, fonction, persontype, needMail, needComputer, needPhone, needMobilePhone } = req.body; // Charge les données du formulaire
     try {
-      await mail.mainMail(lastname, firstname, birthdate, matricule, service, fonction, persontype, needMail, needComputer, needPhone, needMobilePhone);
+      await mail.mainMail(lastname, firstname, birthdate, matricule, service, fonction, persontype, needMail, needComputer, needPhone, needMobilePhone); // Envoie les valeurs du formulaire par email
       
       res.render("newworker.ejs", {
         mailstatus: "Formulaire envoyé avec succès"
@@ -110,9 +114,9 @@ app.post("/form", async (req, res, next) => {
 
 // Envoi du formulaire demande de prêt
 app.post("/lend", async (req, res, next) => {
-  const { demandeur, service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment } = req.body;
+  const { demandeur, service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment } = req.body; // Charge les données du formulaire
   try {
-    await lendmail.mainMail(demandeur, service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment);
+    await lendmail.mainMail(demandeur, service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment); // Envoie les valeurs du formulaire par email
 
     res.render("lendhardware.ejs", {
       mailstatus: "Formulaire envoyé avec succès",

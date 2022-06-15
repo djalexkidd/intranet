@@ -10,6 +10,7 @@ function isUndefined(element) {
   }
 }
 
+// Fonction s'activant si la personne est indirecte, affichant les besoins de la personne ou non
 function isIndirectPerson(persontype, needMail, needComputer, needPhone, needMobilePhone) {
   if (persontype === "indirecte") {
     return `

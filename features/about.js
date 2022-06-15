@@ -1,6 +1,6 @@
-const nodever = process.version
-const pjson = require('../package.json')
-const operatingsystem = process.platform
+const nodever = process.version // Version de Node.JS
+const pjson = require('../package.json') // Version du site
+const operatingsystem = process.platform // Système d'exploitation du serveur
 
 const arr = [nodever, pjson.version, operatingsystem]
 
