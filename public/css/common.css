@@ -43,7 +43,7 @@ nav .main_pages a
 /* Change la couleur du bouton au survol */
 nav a:hover 
 {
-    background: #1f4c8c;
+    background: #3a5693;
 }
 
 /* Cache le bouton hamburger sur la version de bureau*/
@@ -77,7 +77,7 @@ header {
     {
         display: none;
         flex-direction: column;
-        background: #143058;
+        background: #1b2f62;
         height: 220px;
     }
  

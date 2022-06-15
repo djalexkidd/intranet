@@ -13,7 +13,7 @@ main {
     flex-direction: column;
     justify-content: center;
     height: 200px;
-    background-color: #143058;
+    background-color: #1b2f62;
     border-radius: 15px;
     color: white;
     text-align: center;
@@ -22,7 +22,7 @@ main {
 }
 
 .card:hover {
-    background-color: #1f4c8c;
+    background-color: #3a5693;
     cursor: pointer;
 }
 

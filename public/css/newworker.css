@@ -8,7 +8,7 @@ main {
 .container {
     display: flex;
     width: 70%;
-    background-color: #143058;
+    background-color: #1b2f62;
     border-radius: 15px;
     justify-content: center;
     color: white;
