@@ -49,6 +49,10 @@ form {
     display: none;
 }
 
+textarea {
+    height: 200px;
+}
+
 /* Responsive pour la version mobile */
 @media all and (max-width: 991px)
 {

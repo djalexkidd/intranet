@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const mail = require("./features/mail");
+const lendmail = require("./features/lend_mail");
 const weather = require("./features/weather")
 const about = require("./features/about")
 const cors = require('cors');
@@ -37,6 +38,18 @@ app.get("/form", (req, res) => {
     });
 });
 
+// Formulaire prêt de matériel
+app.get("/lend", async function(req, res) {
+  const SERVER_IP = "http://localhost:3000/ad"
+  const reponse = await fetch(SERVER_IP)
+  const data = await reponse.json()
+
+  res.render("lendhardware.ejs", {
+    mailstatus: "",
+    user: data
+  });
+});
+
 // API pour l'Active Directory
 app.get('/ad', cors(), function(req, res){
   ad.findUsers(false, function(err, users) {
@@ -47,7 +60,6 @@ app.get('/ad', cors(), function(req, res){
       
     if (! users) console.log('Groupe: ' + groupName + ' non trouvé.');
     else {
-      console.log(JSON.stringify(users));
       res.end(JSON.stringify(users.sort((a, b) => a.cn.localeCompare(b.cn))))
     }
   });
@@ -94,6 +106,26 @@ app.post("/form", async (req, res, next) => {
 
       console.log(error);
     }
+});
+
+// Envoi du formulaire demande de prêt
+app.post("/lend", async (req, res, next) => {
+  const { demandeur, service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment } = req.body;
+  try {
+    await lendmail.mainMail(demandeur, service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment);
+
+    res.render("lendhardware.ejs", {
+      mailstatus: "Formulaire envoyé avec succès",
+      user: ""
+    });
+  } catch (error) {
+    res.render("lendhardware.ejs", {
+      mailstatus: "Échec de l'envoi",
+      user: ""
+    });
+
+    console.log(error);
+  }
 });
 
 // Hébergement du serveur sur le port 3000

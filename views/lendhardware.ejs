@@ -30,68 +30,59 @@
 
     <!-- CONTENU PRINCIPAL -->
     <main>
-        <p>Nouveau salarié / <a href="/lend">Prêt de matériel</a></p>
+        <p><a href="/form">Nouveau salarié</a> / Prêt de matériel</p>
         <div class="container">
             <form action="" method="post">
                 <div class="option-component">
-                    <p>Nom:</p>
-                    <input name="lastname" required>
+                    <p class="mobile-shrink">Demandeur:</p>
+                    <select name="demandeur" id="demandeur" required>
+                        <option value="">Sélectionnez un utilisateur</option>
+                        <% for(let i = 0; i < user.length; i++) { %>
+                            <option value="<%= user[i].cn %> (<%= user[i].userPrincipalName %>)"><%= user[i].cn %></option>
+                        <% } %>
+                    </select>
                 </div>
 
                 <div class="option-component">
-                    <p>Prénom:</p>
-                    <input name="firstname" required>
-                </div>
-
-                <div class="option-component">
-                    <p class="mobile-shrink">Date de naissance:</p>
-                    <input type="date" name="birthdate" required>
-                </div>
-
-                <div class="option-component">
-                    <p>Matricule:</p>
-                    <input name="matricule" required>
-                </div>
-
-                <div class="option-component">
-                    <p>Service:</p>
+                    <p class="mobile-shrink">Service:</p>
                     <input name="service" required>
                 </div>
 
                 <div class="option-component">
-                    <p>Fonction:</p>
-                    <input name="fonction" required>
+                    <p>Date début prêt:</p>
+                    <input type="date" name="lendDateStart" required>
+                </div>
+
+                <div class="option-component">
+                    <p>Date fin prêt:</p>
+                    <input type="date" name="lendDateEnd" required>
                 </div>
 
                 <div class="spacing"></div>
-
-                <div class="option-component">
-                    <input type="radio" name="persontype" value="indirecte" required>
-                    <p>Personne indirecte</p>
-                </div>
-
-                <div class="option-component">
-                    <input type="radio" name="persontype" value="directe">
-                    <p>Personne directe</p>
-                </div>
-
-                <div class="spacing"></div>
-
-                <div class="hardware-lend">
-
-                <div class="option-component">
-                    <input type="checkbox" name="needMail" value="Adresse mail">
-                    <p>Adresse mail</p>
-                </div>
 
                 <div class="option-component">
                     <input type="checkbox" name="needComputer">
-                    <p>PC / Portable</p>
+                    <p>PC fixe</p>
                 </div>
 
                 <div class="option-component">
-                    <input type="checkbox" name="needPhone">
-                    <p>Téléphone fixe</p>
+                    <input type="checkbox" name="needPortableComputer">
+                    <p>PC portable</p>
+                </div>
+
+                <div class="option-component">
+                    <input type="checkbox" name="needKBM">
+                    <p>Clavier / Souris</p>
+                </div>
+
+                <div class="option-component">
+                    <input type="checkbox" name="needScreen">
+                    <p>Écran</p>
+                </div>
+
+                <div class="option-component">
+                    <input type="checkbox" name="needHeadphones">
+                    <p>Casque audio</p>
                 </div>
 
                 <div class="option-component">
@@ -99,7 +90,13 @@
                     <p>Téléphone mobile</p>
                 </div>
 
+                <div class="spacing"></div>
+
+                <div class="option-component">
+                    <p>Commentaire:</p>
                 </div>
+
+                <textarea name="comment"></textarea>
 
                 <input class="sendform" type="submit" value="Envoyer" />
             </form>
@@ -109,7 +106,6 @@
     </main>
 
     <!-- SCRIPTS -->
-    <script src="js/formworker.js"></script>
     <script src="js/spin.js"></script>
 </body>
 </html>
