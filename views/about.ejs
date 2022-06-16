@@ -36,6 +36,27 @@
             <p class="badge">Node.JS <%= nodever %></p>
             <p class="badge">Hébergé sur <%= operatingsystem %></p>
         </div>
+
+        <div class="badges">
+            <% if (adstatus) { %>
+                <p class="badge">Active Directory activé</p>
+            <% } else { %>
+                <p class="badge badge-error">AD désactivé</p>
+            <% } %>
+
+            <% if (mailstatus) { %>
+                <p class="badge">Mail activé</p>
+            <% } else { %>
+                <p class="badge badge-error">Mail désactivé</p>
+            <% } %>
+
+            <% if (strapistatus) { %>
+                <p class="badge">Strapi activé</p>
+            <% } else { %>
+                <p class="badge badge-error">Strapi désactivé</p>
+            <% } %>
+        </div>
+
         <p>Développé et designé par Alexandre Poyer (<a href="https://github.com/djalexkidd" target="_blank">GitHub</a>)</p>
 
         <canvas width="400" height="400" id="game"></canvas>

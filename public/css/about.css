@@ -18,7 +18,10 @@ main {
     height: 25px;
     border-radius: 25px;
     line-height: 25px;
-    
+}
+
+.badge-error {
+    background-color: #eb0000;
 }
 
 p, h1 {

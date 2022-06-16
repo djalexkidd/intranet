@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const path = require("path");
+const isPortReachable = require('is-port-reachable')
 
 // Importation des fonctionnalités du site
 const mail = require("./features/mail");
@@ -81,11 +82,14 @@ app.get('/list', async (req, res) => {
 });
 
 // Page à propos
-app.get("/about", (req, res) => {
+app.get("/about", async (req, res) => {
   res.render("about.ejs", {
     nodever: about.getProjectInfo([0]), // Version de Node.JS
     version: about.getProjectInfo([1]), // Version du site
-    operatingsystem: about.getProjectInfo([2]) // Système d'exploitation du serveur
+    operatingsystem: about.getProjectInfo([2]), // Système d'exploitation du serveur
+    adstatus: await isPortReachable(389, {host: process.env.AD_SERVER.substring(7)}),
+    mailstatus: await isPortReachable(process.env.SMTP_PORT, {host: process.env.SMTP_SERVER}),
+    strapistatus: await isPortReachable(1337, {host: "127.0.0.1"})
   });
 });
 
