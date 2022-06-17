@@ -8,8 +8,6 @@ Exemple d'utilisation : ```const APICALL = "http://localhost:1337/api/hosts"```
 
 ```GET /api/hosts``` : Liste des signets
 
-```GET /ad``` : Liste des utilisateurs dans l'annuaire Active Directory
-
 ## Liste des attributs
 
 ### Signets

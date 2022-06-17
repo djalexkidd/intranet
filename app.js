@@ -10,7 +10,6 @@ const weather = require("./features/weather")
 const about = require("./features/about")
 
 // Configuration de l'Active Directory
-const cors = require('cors');
 const ActiveDirectory = require('activedirectory2');
 const ad_config = { url: process.env.AD_SERVER,
                baseDN: process.env.AD_BASEDN,
@@ -45,39 +44,38 @@ app.get("/form", (req, res) => {
 
 // Formulaire prêt de matériel
 app.get("/lend", async (req, res) => {
-  const SERVER_IP = "http://localhost:3000/ad"
-  const reponse = await fetch(SERVER_IP)
-  const data = await reponse.json()
-
-  res.render("lendhardware.ejs", {
-    mailstatus: "",
-    user: data
-  });
-});
-
-// API pour l'Active Directory
-app.get('/ad', cors(), (req, res) => {
   ad.findUsers(false, function(err, users) {
     if (err) { // Si échoue
       console.log('ERROR: ' +JSON.stringify(err));
+      res.render("error.ejs");
       return;
     }
-      
+
     if (! users) console.log("Aucun utilisateur n'a été trouvé."); // Si aucun utilisateur (OU incorrecte ?)
     else {
-      res.end(JSON.stringify(users.sort((a, b) => a.cn.localeCompare(b.cn)))) // Envoie la liste par ordre alphabétique
+      res.render("lendhardware.ejs", {
+      mailstatus: "",
+      user: users.sort((a, b) => a.cn.localeCompare(b.cn))
+      });
     }
   });
 });
 
 // Liste des téléphones
-app.get('/list', async (req, res) => {
-  const SERVER_IP = "http://localhost:3000/ad"
-  const reponse = await fetch(SERVER_IP)
-  const data = await reponse.json()
-
-  res.render("list.ejs", {
-    user: data
+app.get('/list', (req, res) => {
+  ad.findUsers(false, function(err, users) {
+    if (err) { // Si échoue
+      console.log('ERROR: ' +JSON.stringify(err));
+      res.render("error.ejs");
+      return;
+    }
+      
+    if (! users) console.log("Aucun utilisateur n'a été trouvé."); // Si aucun utilisateur (OU incorrecte ?)
+    else {
+      res.render("list.ejs", {
+        user: users.sort((a, b) => a.cn.localeCompare(b.cn))
+      });
+    }
   });
 });
 

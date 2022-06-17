@@ -1,0 +1,22 @@
+main {
+    display: flex;
+    flex-direction: column;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    align-items: center;
+}
+
+p, h1 {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.tux {
+    width: 512px;
+    height: 512px;
+    animation: fadeIn 360s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
