@@ -58,7 +58,14 @@ a:hover, a:visited, a:link, a:active
     width: 20px;
     height: 20px;
     border-radius: 100%;
-    background-color: orange;
+}
+
+.green {
+    background-color: green;
+}
+
+.red {
+    background-color: red;
 }
 
 @media (max-width: 1400px) {

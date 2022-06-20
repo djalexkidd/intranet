@@ -40,8 +40,13 @@
                     <p class="host-title"><%= host.data[i].attributes.name %></p>
                     <p class="host-ip"><%= host.data[i].attributes.ip %></p>
                     <div class="host-div">
-                        <div class="status-color"></div>
-                        <p class="host-status">En ligne</p>
+                        <% if (hoststatus[i]) { %>
+                            <div class="status-color green"></div>
+                            <p class="host-status">En ligne</p>
+                        <% } else { %>
+                            <div class="status-color red"></div>
+                            <p class="host-status">Hors ligne</p>
+                        <% } %>
                     </div>
                 </div>
             </a>

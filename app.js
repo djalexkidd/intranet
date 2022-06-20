@@ -8,6 +8,7 @@ const mail = require("./features/mail");
 const lendmail = require("./features/lend_mail");
 const weather = require("./features/weather")
 const about = require("./features/about")
+const hostlist = require("./features/hoststatus")
 
 // Configuration de l'Active Directory
 const ActiveDirectory = require('activedirectory2');
@@ -32,10 +33,11 @@ app.get("/", async (req, res) => {
   const reponse = await fetch(STRAPI_IP)
   const hosts = await reponse.json()
 
-  Promise.all([weather.dataWeather(), hosts]).then((values) => {
+  Promise.all([weather.dataWeather(), hosts, hostlist.checkHost(hosts)]).then((values) => {
     res.render('index.ejs', {
       weather: values[0], // Température à Saint-James
-      host: values[1] // Données de Strapi
+      host: values[1], // Données de Strapi
+      hoststatus: values[2] // État des serveurs
     });
   });
 });
