@@ -34,10 +34,21 @@
             <p class="card-title">Température à Saint-James</p>
             <p class="card-value"><%= weather %></p>
         </div>
+        <% for(let i = 0; i < host.data.length; i++) { %>
+            <a href="http://<%= host.data[i].attributes.ip %>" target="_blank">
+                <div class="card">
+                    <p class="host-title"><%= host.data[i].attributes.name %></p>
+                    <p class="host-ip"><%= host.data[i].attributes.ip %></p>
+                    <div class="host-div">
+                        <div class="status-color"></div>
+                        <p class="host-status">En ligne</p>
+                    </div>
+                </div>
+            </a>
+        <% } %>
     </main>
 
     <!-- SCRIPTS -->
-    <script src="js/hostlist.js"></script>
     <script src="js/spin.js"></script>
 </body>
 </html>

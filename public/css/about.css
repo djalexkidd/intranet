@@ -32,6 +32,7 @@ p, h1 {
 canvas {
     margin-top: 10px;
     border: 1px solid black;
+    display: none;
 }
 
 main {
@@ -42,6 +43,7 @@ main {
 
 .snake-score {
     font-size: 32px;
+    display: none;
 }
 
 /* Responsive pour la version mobile */

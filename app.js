@@ -27,12 +27,17 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set('view engine', 'ejs');
 
 // Page d'accueil
-app.get("/", (req, res) => {
-    weather.dataWeather().then(temp => {
-        res.render('index.ejs', {
-            weather: temp // Température à Saint-James
-        });
-    })
+app.get("/", async (req, res) => {
+  const STRAPI_IP = "http://127.0.0.1:1337/api/hosts"
+  const reponse = await fetch(STRAPI_IP)
+  const hosts = await reponse.json()
+
+  Promise.all([weather.dataWeather(), hosts]).then((values) => {
+    res.render('index.ejs', {
+      weather: values[0], // Température à Saint-James
+      host: values[1] // Données de Strapi
+    });
+  });
 });
 
 // Formulaire nouveau salarié

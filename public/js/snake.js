@@ -147,5 +147,10 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
+document.querySelector('.badge').addEventListener('click', () => {
+  points.style.display = "block"
+  document.querySelector('canvas').style.display = "block"
+});
+
 // start the game
 requestAnimationFrame(loop);
