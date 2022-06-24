@@ -11,8 +11,8 @@ function isUndefined(element) {
 }
 
 // Fonction s'activant si la personne est indirecte, affichant les besoins de la personne ou non
-function isIndirectPerson(persontype, needMail, needComputer, needPhone, needMobilePhone) {
-  if (persontype === "indirecte") {
+function isIndirectPerson(persontype, needMail, needComputer, needPortableComputer, needPhone, needMobilePhone) {
+  if (persontype === "externe") {
     return `
     <br>
     <br>
@@ -20,7 +20,9 @@ function isIndirectPerson(persontype, needMail, needComputer, needPhone, needMob
     <br>
     Adresse mail: ${isUndefined(needMail)}
     <br>
-    PC / Portable: ${isUndefined(needComputer)}
+    PC fixe: ${isUndefined(needComputer)}
+    <br>
+    PC portable: ${isUndefined(needPortableComputer)}
     <br>
     Téléphone fixe: ${isUndefined(needPhone)}
     <br>
@@ -33,7 +35,7 @@ function isIndirectPerson(persontype, needMail, needComputer, needPhone, needMob
 
 // Fonction asynchrone pour l'envoi du formulaire
 module.exports = {
-    mainMail: async function (lastname, firstname, birthdate, matricule, service, fonction, persontype, needMail, needComputer, needPhone, needMobilePhone) {
+    mainMail: async function (lastname, firstname, birthdate, service, fonction, persontype, needMail, needComputer, needPortableComputer, needPhone, needMobilePhone) {
       const transporter = await nodeMail.createTransport({
         host: process.env.SMTP_SERVER,
         port: process.env.SMTP_PORT,
@@ -52,14 +54,12 @@ module.exports = {
           <br>
           Date de naissance: ${birthdate}
           <br>
-          Matricule: ${matricule}
-          <br>
           Service: ${service}
           <br>
           Fonction: ${fonction}
           <br>
           Personne ${persontype}
-          ${isIndirectPerson(persontype, needMail, needComputer, needPhone, needMobilePhone)}`,
+          ${isIndirectPerson(persontype, needMail, needComputer, needPortableComputer, needPhone, needMobilePhone)}`,
       };
       try {
         await transporter.sendMail(mailOption);

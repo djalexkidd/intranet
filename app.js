@@ -105,9 +105,9 @@ app.get('*', (req, res) => {
 
 // Envoi du formulaire nouveau salarié à partir de la page web
 app.post("/form", async (req, res, next) => {
-    const { lastname, firstname, birthdate, matricule, service, fonction, persontype, needMail, needComputer, needPhone, needMobilePhone } = req.body; // Charge les données du formulaire
+    const { lastname, firstname, birthdate, service, fonction, persontype, needMail, needComputer, needPortableComputer, needPhone, needMobilePhone } = req.body; // Charge les données du formulaire
     try {
-      await mail.mainMail(lastname, firstname, birthdate, matricule, service, fonction, persontype, needMail, needComputer, needPhone, needMobilePhone); // Envoie les valeurs du formulaire par email
+      await mail.mainMail(lastname, firstname, birthdate, service, fonction, persontype, needMail, needComputer, needPortableComputer, needPhone, needMobilePhone); // Envoie les valeurs du formulaire par email
       
       res.render("newworker.ejs", {
         mailstatus: "Formulaire envoyé avec succès"
