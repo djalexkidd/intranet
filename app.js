@@ -98,6 +98,11 @@ app.get("/about", async (req, res) => {
   });
 });
 
+// Page d'authentification
+app.get("/login", (req, res) => {
+  res.render("login.ejs");
+});
+
 // Page erreur 404
 app.get('*', (req, res) => {
     res.render('404.ejs');
@@ -139,6 +144,26 @@ app.post("/lend", async (req, res, next) => {
 
     console.log(error);
   }
+});
+
+// Envoi du formulaire de connexion
+app.post('/login', (req, res, next) => {
+  const { userEmail, userPassword } = req.body; // Charge les données du formulaire
+  ad.authenticate(userEmail, userPassword, function(err, auth) {
+    if (err) {
+        console.log('ERROR: '+JSON.stringify(err));
+        res.redirect('/login');
+        return;
+    }
+    if (auth) {
+        console.log('Authenticated!');
+        res.redirect('/');
+    }
+    else {
+        console.log('Authentication failed!');
+        res.redirect('/login');
+    }
+  });
 });
 
 // Hébergement du serveur sur le port 3000
