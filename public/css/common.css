@@ -64,6 +64,18 @@ header {
     align-items: center;
 }
 
+.user-control {
+    display: flex;
+    width: 100%;
+    background: #143058;
+    color: white;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+}
+
+.user-control {
+    height: 20px;
+}
+
 /* Responsive pour la version mobile */
 @media all and (max-width: 991px)
 {

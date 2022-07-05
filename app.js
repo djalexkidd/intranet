@@ -40,7 +40,8 @@ app.get("/", async (req, res) => {
     res.render('index.ejs', {
       weather: values[0], // Température à Saint-James
       host: values[1], // Données de Strapi
-      hoststatus: values[2] // État des serveurs
+      hoststatus: values[2], // État des serveurs
+      useremail: req.cookies.token
     });
   });
 });
@@ -124,18 +125,16 @@ app.post("/form", async (req, res, next) => {
 
 // Envoi du formulaire demande de prêt
 app.post("/lend", async (req, res, next) => {
-  const { demandeur, service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment } = req.body; // Charge les données du formulaire
+  const { service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment } = req.body; // Charge les données du formulaire
   try {
-    await lendmail.mainMail(demandeur, service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment); // Envoie les valeurs du formulaire par email
+    await lendmail.mainMail(req.cookies.token, service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment); // Envoie les valeurs du formulaire par email
 
     res.render("lendhardware.ejs", {
-      mailstatus: "Formulaire envoyé avec succès",
-      user: ""
+      mailstatus: "Formulaire envoyé avec succès"
     });
   } catch (error) {
     res.render("lendhardware.ejs", {
-      mailstatus: "Échec de l'envoi",
-      user: ""
+      mailstatus: "Échec de l'envoi"
     });
 
     console.log(error);
