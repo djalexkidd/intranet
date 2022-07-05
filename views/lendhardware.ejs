@@ -34,16 +34,6 @@
         <div class="container">
             <form action="" method="post">
                 <div class="option-component">
-                    <p class="mobile-shrink">Demandeur:</p>
-                    <select name="demandeur" id="demandeur" required>
-                        <option value="">Sélectionnez un utilisateur</option>
-                        <% for(let i = 0; i < user.length; i++) { %>
-                            <option value="<%= user[i].cn %> (<%= user[i].userPrincipalName %>)"><%= user[i].cn %></option>
-                        <% } %>
-                    </select>
-                </div>
-
-                <div class="option-component">
                     <p class="mobile-shrink">Service:</p>
                     <input name="service" required>
                 </div>

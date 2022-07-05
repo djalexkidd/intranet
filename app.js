@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const isPortReachable = require('is-port-reachable')
+const cookieParser = require('cookie-parser')
 
 // Importation des fonctionnalités du site
 const mail = require("./features/mail");
@@ -9,6 +10,7 @@ const lendmail = require("./features/lend_mail");
 const weather = require("./features/weather")
 const about = require("./features/about")
 const hostlist = require("./features/hoststatus")
+const authcheck = require("./features/cookie")
 
 // Configuration de l'Active Directory
 const ActiveDirectory = require('activedirectory2');
@@ -26,6 +28,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.set('view engine', 'ejs');
+app.use(cookieParser());
 
 // Page d'accueil
 app.get("/", async (req, res) => {
@@ -51,22 +54,15 @@ app.get("/form", (req, res) => {
 
 // Formulaire prêt de matériel
 app.get("/lend", async (req, res) => {
-  ad.findUsers(false, function(err, users) {
-    if (err) { // Si échoue
-      console.log('ERROR: ' +JSON.stringify(err));
-      res.render("error.ejs");
-      return;
-    }
-
-    if (! users) console.log("Aucun utilisateur n'a été trouvé."); // Si aucun utilisateur (OU incorrecte ?)
-    else {
-      res.render("lendhardware.ejs", {
-      mailstatus: "",
-      user: users.sort((a, b) => a.cn.localeCompare(b.cn))
-      });
-    }
-  });
-});
+  if (authcheck.checkCookie(req)) {
+    res.render("lendhardware.ejs", {
+      mailstatus: ""
+    });
+  } else {
+    res.redirect("/login")
+  }
+  }
+);
 
 // Liste des téléphones
 app.get('/list', (req, res) => {
@@ -156,6 +152,7 @@ app.post('/login', (req, res, next) => {
         return;
     }
     if (auth) {
+        res.cookie(`token`, userEmail);
         console.log('Authenticated!');
         res.redirect('/');
     }
