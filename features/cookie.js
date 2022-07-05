@@ -1,10 +1,10 @@
 module.exports = {
     checkCookie: function (input) {
-        if (input.token !== "") {
-            return false
+        if (input !== undefined) {
+            return true
         }
         else {
-            return true
+            return false
         }
     }
 }

@@ -54,7 +54,7 @@ app.get("/form", (req, res) => {
 
 // Formulaire prêt de matériel
 app.get("/lend", async (req, res) => {
-  if (authcheck.checkCookie(req)) {
+  if (authcheck.checkCookie(req.cookies.token)) {
     res.render("lendhardware.ejs", {
       mailstatus: ""
     });
