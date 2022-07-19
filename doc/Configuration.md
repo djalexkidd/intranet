@@ -5,6 +5,10 @@ Toutes les variables d'environnement se situent dans le fichier ```.env``` à la
 Voici un exemple de configuration :
 
 ```
+[GÉNÉRAL]
+PORT=3000                                   --- Port d'écoute
+DOMAIN_NAME=domain.com                      --- Nom de domaine
+
 [PAGE D'ACCUEIL]
 WEATHER_APIKEY=0                            --- Clé API de openweathermap.org pour la météo
 
@@ -19,6 +23,9 @@ GLPI_SENDER=intranet@domain.com             --- Email de l'envoyeur
 [LISTE UTILISATEURS ACTIVE DIRECTORY]
 AD_SERVER=ldap://dc.domain.com              --- Adresse IP de l'Active Directory
 AD_BASEDN=ou=services,dc=domain,dc=com      --- Domaine racine
-AD_USERNAME=username@domain.com             --- Utilisateur de connexion
-AD_PASSWORD=************                    --- Mot de passe de connexion
+
+[SÉCURITÉ]
+SSL=false                                   --- Utiliser HTTPS
+SSL_KEY=/usr/local/ssl/key.pem              --- Chemin de la clé
+SSL_CERT=/usr/local/ssl/cert.pem            --- Chemin du certificat
 ```
