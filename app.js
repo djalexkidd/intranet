@@ -19,7 +19,7 @@ const ad_config = { url: process.env.AD_SERVER,
                username: process.env.AD_USERNAME,
                password: process.env.AD_PASSWORD,
                attributes: {
-                user: ['userPrincipalName', 'cn', 'telephoneNumber' ]
+                user: ['userPrincipalName', 'cn', 'telephoneNumber', 'otherTelephone', 'ipPhone']
               } }
 const ad = new ActiveDirectory(ad_config);
 
@@ -48,9 +48,13 @@ app.get("/", async (req, res) => {
 
 // Formulaire nouveau salarié
 app.get("/form", (req, res) => {
+  if (authcheck.checkCookie(req.cookies.token)) {
     res.render("newworker.ejs", {
       mailstatus: ""
     });
+  } else {
+    res.redirect("/login")
+  }
 });
 
 // Formulaire prêt de matériel
@@ -67,6 +71,7 @@ app.get("/lend", async (req, res) => {
 
 // Liste des téléphones
 app.get('/list', (req, res) => {
+  if (authcheck.checkCookie(req.cookies.token)) {
   ad.findUsers(false, function(err, users) {
     if (err) { // Si échoue
       console.log('ERROR: ' +JSON.stringify(err));
@@ -81,10 +86,14 @@ app.get('/list', (req, res) => {
       });
     }
   });
+  } else {
+    res.redirect("/login")
+  }
 });
 
 // Page à propos
 app.get("/about", async (req, res) => {
+  if (authcheck.checkCookie(req.cookies.token)) {
   res.render("about.ejs", {
     nodever: about.getProjectInfo([0]), // Version de Node.JS
     version: about.getProjectInfo([1]), // Version du site
@@ -93,6 +102,9 @@ app.get("/about", async (req, res) => {
     mailstatus: await isPortReachable(process.env.SMTP_PORT, {host: process.env.SMTP_SERVER}),
     strapistatus: await isPortReachable(1337, {host: "127.0.0.1"})
   });
+  } else {
+    res.redirect("/login")
+  }
 });
 
 // Page d'authentification
