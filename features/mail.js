@@ -35,13 +35,13 @@ function isIndirectPerson(persontype, needMail, needComputer, needPortableComput
 
 // Fonction asynchrone pour l'envoi du formulaire
 module.exports = {
-    mainMail: async function (lastname, firstname, birthdate, service, fonction, persontype, needMail, needComputer, needPortableComputer, needPhone, needMobilePhone) {
+    mainMail: async function (lastname, firstname, birthdate, service, fonction, persontype, needMail, needComputer, needPortableComputer, needPhone, needMobilePhone, smtpUser, smtpPass) {
       const transporter = await nodeMail.createTransport({
         host: process.env.SMTP_SERVER,
         port: process.env.SMTP_PORT,
         auth: {
-          user: process.env.SMTP_EMAIL,
-          pass: process.env.SMTP_PASSWORD,
+          user: smtpUser,
+          pass: smtpPass,
         },
       });
       const mailOption = {

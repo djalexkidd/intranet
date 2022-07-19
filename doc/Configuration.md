@@ -15,8 +15,6 @@ WEATHER_APIKEY=0                            --- Clé API de openweathermap.org p
 [FORMULAIRE MAIL]
 SMTP_SERVER=192.168.0.5                     --- Adresse IP du serveur mail
 SMTP_PORT=587                               --- Port du serveur mail
-SMTP_EMAIL=intranet@domain.com              --- Email de connexion
-SMTP_PASSWORD=************                  --- Mot de passe de connexion
 GLPI_EMAIL=ticket@domain.com                --- Adresse email de destination
 GLPI_SENDER=intranet@domain.com             --- Email de l'envoyeur
 

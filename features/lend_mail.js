@@ -12,13 +12,13 @@ function isUndefined(element) {
 
 // Fonction asynchrone pour l'envoi du formulaire
 module.exports = {
-    mainMail: async function (demandeur, service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment) {
+    mainMail: async function (demandeur, service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment, smtpPass) {
       const transporter = await nodeMail.createTransport({
         host: process.env.SMTP_SERVER,
         port: process.env.SMTP_PORT,
         auth: {
-          user: process.env.SMTP_EMAIL,
-          pass: process.env.SMTP_PASSWORD,
+          user: demandeur,
+          pass: smtpPass,
         },
       });
       const mailOption = {

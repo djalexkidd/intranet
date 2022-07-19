@@ -142,7 +142,7 @@ app.get('*', (req, res) => {
 app.post("/form", async (req, res, next) => {
     const { lastname, firstname, birthdate, service, fonction, persontype, needMail, needComputer, needPortableComputer, needPhone, needMobilePhone } = req.body; // Charge les données du formulaire
     try {
-      await mail.mainMail(lastname, firstname, birthdate, service, fonction, persontype, needMail, needComputer, needPortableComputer, needPhone, needMobilePhone); // Envoie les valeurs du formulaire par email
+      await mail.mainMail(lastname, firstname, birthdate, service, fonction, persontype, needMail, needComputer, needPortableComputer, needPhone, needMobilePhone, req.cookies.token, req.cookies.token2); // Envoie les valeurs du formulaire par email
       
       res.render("newworker.ejs", {
         mailstatus: "Formulaire envoyé avec succès"
@@ -160,7 +160,7 @@ app.post("/form", async (req, res, next) => {
 app.post("/lend", async (req, res, next) => {
   const { service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment } = req.body; // Charge les données du formulaire
   try {
-    await lendmail.mainMail(req.cookies.token, service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment); // Envoie les valeurs du formulaire par email
+    await lendmail.mainMail(req.cookies.token, service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment, req.cookies.token2); // Envoie les valeurs du formulaire par email
 
     res.render("lendhardware.ejs", {
       mailstatus: "Formulaire envoyé avec succès"
