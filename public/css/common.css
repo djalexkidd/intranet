@@ -76,6 +76,15 @@ header {
     height: 20px;
 }
 
+.logout {
+    color: white;
+    margin-left: 25px;
+}
+
+.logout:link {
+    text-decoration: underline;
+}
+
 /* Responsive pour la version mobile */
 @media all and (max-width: 991px)
 {

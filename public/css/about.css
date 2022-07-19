@@ -24,7 +24,7 @@ main {
     background-color: #eb0000;
 }
 
-p, h1 {
+main p, h1 {
     text-align: center;
     margin-top: 30px;
 }

@@ -60,7 +60,8 @@ app.get("/", async (req, res) => {
 app.get("/form", (req, res) => {
   if (authcheck.checkCookie(req.cookies.token)) {
     res.render("newworker.ejs", {
-      mailstatus: ""
+      mailstatus: "",
+      useremail: req.cookies.token
     });
   } else {
     res.redirect("/login")
@@ -71,7 +72,8 @@ app.get("/form", (req, res) => {
 app.get("/lend", async (req, res) => {
   if (authcheck.checkCookie(req.cookies.token)) {
     res.render("lendhardware.ejs", {
-      mailstatus: ""
+      mailstatus: "",
+      useremail: req.cookies.token
     });
   } else {
     res.redirect("/login")
@@ -92,7 +94,8 @@ app.get('/list', (req, res) => {
     if (! users) console.log("Aucun utilisateur n'a été trouvé."); // Si aucun utilisateur (OU incorrecte ?)
     else {
       res.render("list.ejs", {
-        user: users.sort((a, b) => a.cn.localeCompare(b.cn))
+        user: users.sort((a, b) => a.cn.localeCompare(b.cn)),
+        useremail: req.cookies.token
       });
     }
   });
@@ -110,7 +113,8 @@ app.get("/about", async (req, res) => {
     operatingsystem: about.getProjectInfo([2]), // Système d'exploitation du serveur
     adstatus: await isPortReachable(389, {host: process.env.AD_SERVER.substring(7)}),
     mailstatus: await isPortReachable(process.env.SMTP_PORT, {host: process.env.SMTP_SERVER}),
-    strapistatus: await isPortReachable(1337, {host: "127.0.0.1"})
+    strapistatus: await isPortReachable(1337, {host: "127.0.0.1"}),
+    useremail: req.cookies.token
   });
   } else {
     res.redirect("/login")
