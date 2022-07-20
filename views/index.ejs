@@ -41,7 +41,11 @@
             <p class="card-value"><%= weather %></p>
         </div>
         <% for(let i = 0; i < host.data.length; i++) { %>
-            <a href="http://<%= host.data[i].attributes.ip %>" target="_blank">
+            <% if (host.data[i].attributes.secure) { %>
+                <a href="https://<%= host.data[i].attributes.ip %>" target="_blank">
+            <% } else { %>
+                <a href="http://<%= host.data[i].attributes.ip %>" target="_blank">
+            <% } %>
                 <div class="card">
                     <p class="host-title"><%= host.data[i].attributes.name %></p>
                     <p class="host-ip"><%= host.data[i].attributes.ip %></p>
