@@ -13,3 +13,7 @@ td, th {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
+
+form {
+    margin-top: 20px;
+}

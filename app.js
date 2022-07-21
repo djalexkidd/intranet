@@ -83,8 +83,10 @@ app.get("/lend", async (req, res) => {
 
 // Liste des téléphones
 app.get('/list', (req, res) => {
+  const query = 'cn=*' + req.query.search + '*';
+
   if (authcheck.checkCookie(req.cookies.token)) {
-  getAdUser(req).findUsers(false, function(err, users) {
+  getAdUser(req).findUsers(req.query.search === "" || req.query.search === undefined ? false : query, function(err, users) {
     if (err) { // Si échoue
       console.log('ERROR: ' +JSON.stringify(err));
       res.render("error.ejs");
@@ -194,6 +196,12 @@ app.post('/login', (req, res, next) => {
         res.redirect('/login');
     }
   });
+});
+
+app.post('/list', (req, res, next) => {
+  const { search } = req.body;
+
+  res.redirect('/list?search=' + search)
 });
 
 // Hébergement du serveur
