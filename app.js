@@ -13,6 +13,7 @@ const weather = require("./features/weather")
 const about = require("./features/about")
 const hostlist = require("./features/hoststatus")
 const authcheck = require("./features/cookie")
+const jobs = require("./features/jobs")
 
 const app = express();
 
@@ -135,16 +136,13 @@ app.get('/logout', (req, res) => {
   res.redirect('/login');
 });
 
-// Page d'offres d'emplois
-app.get("/", async (req, res) => {
-  const STRAPI_IP = "http://127.0.0.1:1337/api/jobs"
-  const reponse = await fetch(STRAPI_IP)
-  const jobs = await reponse.json()
-
+// Page d'offres d'emploi
+app.get("/jobs", async (req, res) => {
   if (authcheck.checkCookie(req.cookies.token)) {
-    jobs.then(temp => {
+    jobs.dataJobs().then(jobsdata => {
       res.render('jobs.ejs', {
-          job: temp
+          job: jobsdata,
+          useremail: req.cookies.token
       });
     })
   } else {
