@@ -150,6 +150,17 @@ app.get("/jobs", async (req, res) => {
   }
 });
 
+// Création offre d'emploi
+app.get("/newjob", async (req, res) => {
+  if (authcheck.checkCookie(req.cookies.token)) {
+      res.render('newjob.ejs', {
+          useremail: req.cookies.token
+      });
+  } else {
+    res.redirect("/login")
+  }
+});
+
 // Page erreur 404
 app.get('*', (req, res) => {
     res.render('404.ejs');
@@ -217,6 +228,14 @@ app.post('/list', (req, res, next) => {
   const { search } = req.body;
 
   res.redirect('/list?search=' + search)
+});
+
+app.post('/newjob', (req, res, next) => {
+  const { jobName, jobDetails } = req.body; // Charge les données du formulaire
+
+  jobs.submitJob(jobName, jobDetails)
+
+  res.redirect('/jobs')
 });
 
 // Hébergement du serveur
