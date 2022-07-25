@@ -135,6 +135,23 @@ app.get('/logout', (req, res) => {
   res.redirect('/login');
 });
 
+// Page d'offres d'emplois
+app.get("/", async (req, res) => {
+  const STRAPI_IP = "http://127.0.0.1:1337/api/jobs"
+  const reponse = await fetch(STRAPI_IP)
+  const jobs = await reponse.json()
+
+  if (authcheck.checkCookie(req.cookies.token)) {
+    jobs.then(temp => {
+      res.render('jobs.ejs', {
+          job: temp
+      });
+    })
+  } else {
+    res.redirect("/login")
+  }
+});
+
 // Page erreur 404
 app.get('*', (req, res) => {
     res.render('404.ejs');

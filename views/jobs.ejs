@@ -35,6 +35,12 @@
 
     <!-- CONTENU PRINCIPAL -->
     <main>
+        <% for(let i = 0; i < job.data.length; i++) { %>
+            <div class="job">
+                <p class="job-title"><%= job.data[i].attributes.name %></p>
+                <p class="job-details"><%= job.data[i].attributes.details %></p>
+            </div>
+        <% } %>
     </main>
 
     <!-- SCRIPTS -->
