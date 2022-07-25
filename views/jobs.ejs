@@ -37,6 +37,8 @@
 
     <!-- CONTENU PRINCIPAL -->
     <main>
+        <a class="add-button" href="/newjob"><img src="img/plus.png" />Nouveau</a>
+
         <% for(let i = 0; i < job.data.length; i++) { %>
             <div class="job">
                 <p class="job-title"><%= job.data[i].attributes.name %></p>
