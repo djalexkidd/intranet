@@ -54,7 +54,7 @@ main {
         flex-direction: column;
     }
 
-    p, h1 {
+    main p, h1 {
         text-align: center;
         margin-top: 20px;
     }

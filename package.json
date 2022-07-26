@@ -1,6 +1,6 @@
 {
   "name": "intranet",
-  "version": "2022.06",
+  "version": "2022.07.26",
   "description": "",
   "main": "app.js",
   "scripts": {
