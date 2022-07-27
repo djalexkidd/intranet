@@ -41,7 +41,7 @@
 
         <div class="multiline"><%= job.data.attributes.details %></div>
 
-        <a class="add-button" href="/jobdelete?id=<%= job.data.id %>"><img src="img/plus.png" />Supprimer</a>
+        <a class="add-button" href="/jobdelete?id=<%= job.data.id %>" onclick="return confirm('Voulez-vous vraiment supprimer cette offre ?')"><img src="img/plus.png" />Supprimer</a>
     </main>
 
     <!-- SCRIPTS -->
