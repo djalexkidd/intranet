@@ -186,6 +186,20 @@ app.get("/jobdelete", async (req, res) => {
   }
 });
 
+// Modification d'une offre d'emploi
+app.get("/editjob", async (req, res) => {
+  if (authcheck.checkCookie(req.cookies.token)) {
+    jobs.viewJob(req.query.id).then(jobdata => {
+      res.render('editjob.ejs', {
+          job: jobdata,
+          useremail: req.cookies.token
+      });
+    })
+  } else {
+    res.redirect("/login")
+  }
+});
+
 // Page erreur 404
 app.get('*', (req, res) => {
     res.render('404.ejs');
@@ -261,6 +275,15 @@ app.post('/newjob', (req, res, next) => {
   const { jobName, jobDetails } = req.body; // Charge les données du formulaire
 
   jobs.submitJob(jobName, jobDetails)
+
+  res.redirect('/jobs')
+});
+
+// Modification d'une offre d'emploi
+app.post('/editjob', (req, res, next) => {
+  const { jobName, jobDetails } = req.body; // Charge les données du formulaire
+
+  jobs.editJob(req.query.id, jobName, jobDetails)
 
   res.redirect('/jobs')
 });

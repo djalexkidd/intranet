@@ -33,5 +33,18 @@ module.exports = {
         const reponse = await fetch(STRAPI_IP + jobId, {
             method: "DELETE"
         })
+    },
+    editJob: async function (jobId, jobName, jobDetails) {
+        // Modification d'une offre d'emploi
+        const reponse = await fetch(STRAPI_IP + jobId, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+            data: {
+                "name": jobName,
+                "details": jobDetails
+            }
+            })
+        })
     }
 }
