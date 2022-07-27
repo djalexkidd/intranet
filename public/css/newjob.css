@@ -40,9 +40,10 @@ form {
 }
 
 textarea {
-    height: 200px;
+    height: 500px;
     width: 90%;
     margin: 0 auto;
+    resize: none;
 }
 
 /* Responsive pour la version mobile */
