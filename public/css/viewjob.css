@@ -2,13 +2,18 @@ main {
     font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
 
-.line {
-    border: solid 1px;
+.multiline {
+    white-space: pre-wrap;
+}
+
+h1 {
+    text-align: center;
+    font-size: 48px;
 }
 
 .add-button {
     padding: 15px 25px;
-    background-color: #143058;
+    background-color: #be0f1f;
     color: white;
     display: flex;
     width: 170px;
@@ -24,16 +29,10 @@ main {
 
 .add-button img {
     width: 32px;
-    margin-right: 26px;
+    margin-right: 18px;
+    transform: rotate(45deg);
 }
 
 .add-button:hover {
-    background-color: #3a5693;
-}
-
-p {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
+    background-color: #ff0015;
 }

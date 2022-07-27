@@ -1,4 +1,4 @@
-const STRAPI_IP = "http://127.0.0.1:1337/api/jobs"
+const STRAPI_IP = "http://127.0.0.1:1337/api/jobs/"
 
 module.exports = {
     dataJobs: async function () {
@@ -19,6 +19,19 @@ module.exports = {
                 "details": jobDetails
             }
             })
+        })
+    },
+    viewJob: async function (jobId) {
+        // Visionnage d'une offre d'emploi
+        const reponse = await fetch(STRAPI_IP + jobId)
+        const job = await reponse.json()
+
+        return job
+    },
+    deleteJob: async function (jobId) {
+        // Suppression d'une offre d'emploi
+        const reponse = await fetch(STRAPI_IP + jobId, {
+            method: "DELETE"
         })
     }
 }

@@ -161,6 +161,31 @@ app.get("/newjob", async (req, res) => {
   }
 });
 
+// Détails de l'offre d'emploi
+app.get("/viewjob", async (req, res) => {
+  if (authcheck.checkCookie(req.cookies.token)) {
+    jobs.viewJob(req.query.id).then(jobdata => {
+      res.render('viewjob.ejs', {
+          job: jobdata,
+          useremail: req.cookies.token
+      });
+    })
+  } else {
+    res.redirect("/login")
+  }
+});
+
+// Suppression d'une offre d'emploi
+app.get("/jobdelete", async (req, res) => {
+  if (authcheck.checkCookie(req.cookies.token)) {
+    jobs.deleteJob(req.query.id).then(jobdata => {
+      res.redirect("/jobs")
+    })
+  } else {
+    res.redirect("/login")
+  }
+});
+
 // Page erreur 404
 app.get('*', (req, res) => {
     res.render('404.ejs');
@@ -224,12 +249,14 @@ app.post('/login', (req, res, next) => {
   });
 });
 
+// Recherche de téléphones
 app.post('/list', (req, res, next) => {
   const { search } = req.body;
 
   res.redirect('/list?search=' + search)
 });
 
+// Envoi d'une offre d'emploi
 app.post('/newjob', (req, res, next) => {
   const { jobName, jobDetails } = req.body; // Charge les données du formulaire
 

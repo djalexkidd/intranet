@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/jobs.css">
+    <link rel="stylesheet" href="css/viewjob.css">
     <link rel="icon" href="img/favicon.png" type="image/png" />
     <title>Intranet Saint-James</title>
 </head>
@@ -37,18 +37,11 @@
 
     <!-- CONTENU PRINCIPAL -->
     <main>
-        <a class="add-button" href="/newjob"><img src="img/plus.png" />Nouveau</a>
+        <h1><%= job.data.attributes.name %></h1>
 
-        <% for(let i = 0; i < job.data.length; i++) { %>
-            <div class="job">
-                <h2 class="job-title"><%= job.data[i].attributes.name %></h2>
-                <br>
-                <p class="job-details"><%= job.data[i].attributes.details %></p>
-                <a href="/viewjob?id=<%= job.data[i].id %>">Voir</a>
-            </div>
+        <div class="multiline"><%= job.data.attributes.details %></div>
 
-            <div class="line"></div>
-        <% } %>
+        <a class="add-button" href="/jobdelete?id=<%= job.data.id %>"><img src="img/plus.png" />Supprimer</a>
     </main>
 
     <!-- SCRIPTS -->
