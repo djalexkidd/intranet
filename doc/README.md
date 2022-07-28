@@ -9,3 +9,5 @@
 ```Routes.md``` : Liste des routes GET et POST.
 
 ```Strapi.md``` : Permissions pour les collections de Strapi.
+
+```HTTPS.md``` : Configuration du chiffrement SSL/TLS.
