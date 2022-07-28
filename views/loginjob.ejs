@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/viewjob.css">
+    <link rel="stylesheet" href="css/newworker.css">
     <link rel="icon" href="img/favicon.png" type="image/png" />
     <title>Intranet Saint-James</title>
 </head>
@@ -37,18 +37,16 @@
 
     <!-- CONTENU PRINCIPAL -->
     <main>
-        <h1><%= job.data.attributes.name %></h1>
-
-        <h2>#<%= job.data.id %></h2>
-
-        <div class="multiline"><%= job.data.attributes.details %></div>
-
-        <% if (strapiStatus) { %>
-        <div class="btn-align">
-            <a class="action-button edit" href="/editjob?id=<%= job.data.id %>"><img src="img/edit.png" />Éditer</a>
-            <a class="action-button delete" href="/jobdelete?id=<%= job.data.id %>" onclick="return confirm('⚠️ Voulez-vous vraiment supprimer cette offre ?')"><img src="img/plus.png" />Supprimer</a>
+        <p>Connexion à Strapi</p>
+        <div class="container">
+            <form action="" method="post">
+                <div class="option-component">
+                    <p>Mot de passe:</p>
+                    <input name="password" type="password" required>
+                </div>
+                <input class="sendform" type="submit" value="Se connecter" />
+            </form>
         </div>
-        <% } %>
     </main>
 
     <!-- SCRIPTS -->

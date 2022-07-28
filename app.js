@@ -37,6 +37,16 @@ function getAdUser(req) {
   return ad
 }
 
+function isStrapiConnected(req) {
+  if (req.cookies.jwt !== undefined) {
+    return true
+  } else {
+    return false
+  }
+}
+
+// === REQUETES GET ===
+
 // Page d'accueil
 app.get("/", async (req, res) => {
   const STRAPI_IP = "http://127.0.0.1:1337/api/hosts"
@@ -133,6 +143,7 @@ app.get("/login", (req, res) => {
 app.get('/logout', (req, res) => {
   res.clearCookie("token");
   res.clearCookie("token2");
+  res.clearCookie("jwt");
   res.redirect('/login');
 });
 
@@ -142,6 +153,7 @@ app.get("/jobs", async (req, res) => {
     jobs.dataJobs().then(jobsdata => {
       res.render('jobs.ejs', {
           job: jobsdata,
+          strapiStatus: isStrapiConnected(req),
           useremail: req.cookies.token
       });
     })
@@ -167,6 +179,7 @@ app.get("/viewjob", async (req, res) => {
     jobs.viewJob(req.query.id).then(jobdata => {
       res.render('viewjob.ejs', {
           job: jobdata,
+          strapiStatus: isStrapiConnected(req),
           useremail: req.cookies.token
       });
     })
@@ -178,7 +191,7 @@ app.get("/viewjob", async (req, res) => {
 // Suppression d'une offre d'emploi
 app.get("/jobdelete", async (req, res) => {
   if (authcheck.checkCookie(req.cookies.token)) {
-    jobs.deleteJob(req.query.id).then(jobdata => {
+    jobs.deleteJob(req.query.id, req.cookies.jwt).then(jobdata => {
       res.redirect("/jobs")
     })
   } else {
@@ -200,10 +213,24 @@ app.get("/editjob", async (req, res) => {
   }
 });
 
+// Connexion à Strapi
+app.get("/loginjob", async (req, res) => {
+  if (authcheck.checkCookie(req.cookies.token)) {
+    res.render("loginjob.ejs", {
+      useremail: req.cookies.token
+    });
+  } else {
+    res.redirect("/login")
+  }
+  }
+);
+
 // Page erreur 404
 app.get('*', (req, res) => {
     res.render('404.ejs');
 });
+
+// === REQUETES POST ===
 
 // Envoi du formulaire nouveau salarié à partir de la page web
 app.post("/form", async (req, res, next) => {
@@ -274,7 +301,7 @@ app.post('/list', (req, res, next) => {
 app.post('/newjob', (req, res, next) => {
   const { jobName, jobDetails } = req.body; // Charge les données du formulaire
 
-  jobs.submitJob(jobName, jobDetails)
+  jobs.submitJob(jobName, jobDetails, req.cookies.jwt)
 
   res.redirect('/jobs')
 });
@@ -283,7 +310,16 @@ app.post('/newjob', (req, res, next) => {
 app.post('/editjob', (req, res, next) => {
   const { jobName, jobDetails } = req.body; // Charge les données du formulaire
 
-  jobs.editJob(req.query.id, jobName, jobDetails)
+  jobs.editJob(req.query.id, jobName, jobDetails, req.cookies.jwt)
+
+  res.redirect('/jobs')
+});
+
+// Connexion à Strapi
+app.post('/loginjob', async (req, res, next) => {
+  const { password } = req.body; // Charge les données du formulaire
+
+  await jobs.strapiConnect(password, res, req.cookies.token)
 
   res.redirect('/jobs')
 });

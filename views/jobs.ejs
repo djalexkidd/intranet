@@ -37,7 +37,11 @@
 
     <!-- CONTENU PRINCIPAL -->
     <main>
-        <a class="add-button" href="/newjob"><img src="img/plus.png" />Nouveau</a>
+        <% if (strapiStatus) { %>
+            <a class="add-button" href="/newjob"><img src="img/plus.png" />Nouveau</a>
+        <% } else { %>
+            <a class="add-button" href="/loginjob"><img src="img/user.svg" />Connexion</a>
+        <% } %>
 
         <% for(let i = 0; i < job.data.length; i++) { %>
             <div class="job">
