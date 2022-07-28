@@ -219,6 +219,7 @@ app.get("/editjob", async (req, res) => {
 app.get("/loginjob", async (req, res) => {
   if (authcheck.checkCookie(req.cookies.token)) {
     res.render("loginjob.ejs", {
+      error: "",
       useremail: req.cookies.token
     });
   } else {
@@ -326,8 +327,6 @@ app.post('/loginjob', async (req, res, next) => {
   const { password } = req.body; // Charge les données du formulaire
 
   await jobs.strapiConnect(password, res, req.cookies.token)
-
-  res.redirect('/jobs')
 });
 
 // Hébergement du serveur

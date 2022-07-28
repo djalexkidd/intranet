@@ -65,6 +65,12 @@ module.exports = {
 
         if (data.jwt != null) {
             res.cookie("jwt", data.jwt)
+            res.redirect('/jobs')
+        } else {
+            res.render("loginjob.ejs", {
+                error: "Nom d'utilisateur ou mot de passe incorrect.",
+                useremail: email
+            });
         }
     }
 }
