@@ -47,7 +47,7 @@ nav a:hover
 }
 
 /* Cache le bouton hamburger sur la version de bureau*/
-label, #toggle
+nav label, #toggle
 {
     display: none;
 }
@@ -106,7 +106,7 @@ header {
         width: 100%;
     }
  
-    label 
+    nav label
     {
         width: 30px;
         display: flex;
