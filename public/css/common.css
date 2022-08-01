@@ -55,7 +55,6 @@ nav label, #toggle
 /* Logo du site */
 .logo {
     height: 100px;
-    background-color: rgb(203, 203, 203);
 }
 
 /* En-tête */
@@ -124,7 +123,7 @@ header {
 
     .logo {
         margin-bottom: 20px;
-        background-color: white;
+        margin-top: 20px;
     }
 
     header {
