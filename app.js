@@ -49,6 +49,7 @@ function isStrapiConnected(req) {
 
 // Page d'accueil
 app.get("/", async (req, res) => {
+  try {
   const STRAPI_IP = "http://127.0.0.1:1337/api/hosts"
   const reponse = await fetch(STRAPI_IP)
   const hosts = await reponse.json()
@@ -64,6 +65,20 @@ app.get("/", async (req, res) => {
   });
   } else {
     res.redirect("/login")
+  }
+  } catch {
+    if (authcheck.checkCookie(req.cookies.token)) {
+      weather.dataWeather().then(value => {
+        res.render('index.ejs', {
+          weather: value, // Température à Saint-James
+          host: {data: []}, // Données de Strapi
+          hoststatus: {}, // État des serveurs
+          useremail: req.cookies.token
+        });
+    });
+    } else {
+      res.redirect("/login")
+    }
   }
 });
 
