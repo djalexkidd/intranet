@@ -45,6 +45,19 @@ function isStrapiConnected(req) {
   }
 }
 
+// Middleware pour vérifier si l'utilisateur est authentifié
+app.all('*', checkUser);
+
+function checkUser(req, res, next) {
+  if (req.path == '/login') return next();
+
+  if (authcheck.checkCookie(req.cookies.token)) {
+    next();
+  } else {
+    res.redirect("/login")
+  }
+}
+
 // === REQUETES GET ===
 
 // Page d'accueil
@@ -54,7 +67,6 @@ app.get("/", async (req, res) => {
   const reponse = await fetch(STRAPI_IP)
   const hosts = await reponse.json()
 
-  if (authcheck.checkCookie(req.cookies.token)) {
   Promise.all([weather.dataWeather(), hosts, hostlist.checkHost(hosts)]).then((values) => {
     res.render('index.ejs', {
       weather: values[0], // Température à Saint-James
@@ -63,11 +75,7 @@ app.get("/", async (req, res) => {
       useremail: req.cookies.token
     });
   });
-  } else {
-    res.redirect("/login")
-  }
   } catch {
-    if (authcheck.checkCookie(req.cookies.token)) {
       weather.dataWeather().then(value => {
         res.render('index.ejs', {
           weather: value, // Température à Saint-James
@@ -76,34 +84,23 @@ app.get("/", async (req, res) => {
           useremail: req.cookies.token
         });
     });
-    } else {
-      res.redirect("/login")
-    }
   }
 });
 
 // Formulaire nouveau salarié
 app.get("/form", (req, res) => {
-  if (authcheck.checkCookie(req.cookies.token)) {
     res.render("newworker.ejs", {
       mailstatus: "",
       useremail: req.cookies.token
     });
-  } else {
-    res.redirect("/login")
-  }
 });
 
 // Formulaire prêt de matériel
 app.get("/lend", async (req, res) => {
-  if (authcheck.checkCookie(req.cookies.token)) {
     res.render("lendhardware.ejs", {
       mailstatus: "",
       useremail: req.cookies.token
     });
-  } else {
-    res.redirect("/login")
-  }
   }
 );
 
@@ -111,7 +108,6 @@ app.get("/lend", async (req, res) => {
 app.get('/list', (req, res) => {
   const query = 'cn=*' + req.query.search + '*';
 
-  if (authcheck.checkCookie(req.cookies.token)) {
   getAdUser(req).findUsers(req.query.search === "" || req.query.search === undefined ? false : query, function(err, users) {
     if (err) { // Si échoue
       console.log('ERROR: ' +JSON.stringify(err));
@@ -127,14 +123,10 @@ app.get('/list', (req, res) => {
       });
     }
   });
-  } else {
-    res.redirect("/login")
-  }
 });
 
 // Page à propos
 app.get("/about", async (req, res) => {
-  if (authcheck.checkCookie(req.cookies.token)) {
   res.render("about.ejs", {
     nodever: about.getProjectInfo([0]), // Version de Node.JS
     version: about.getProjectInfo([1]), // Version du site
@@ -144,9 +136,6 @@ app.get("/about", async (req, res) => {
     strapistatus: await isPortReachable(1337, {host: "127.0.0.1"}),
     useremail: req.cookies.token
   });
-  } else {
-    res.redirect("/login")
-  }
 });
 
 // Page d'authentification
@@ -166,7 +155,6 @@ app.get('/logout', (req, res) => {
 
 // Page d'offres d'emploi
 app.get("/jobs", async (req, res) => {
-  if (authcheck.checkCookie(req.cookies.token)) {
     jobs.dataJobs().then(jobsdata => {
       res.render('jobs.ejs', {
           job: jobsdata,
@@ -174,25 +162,17 @@ app.get("/jobs", async (req, res) => {
           useremail: req.cookies.token
       });
     })
-  } else {
-    res.redirect("/login")
-  }
 });
 
 // Création offre d'emploi
 app.get("/newjob", async (req, res) => {
-  if (authcheck.checkCookie(req.cookies.token)) {
       res.render('newjob.ejs', {
           useremail: req.cookies.token
       });
-  } else {
-    res.redirect("/login")
-  }
 });
 
 // Détails de l'offre d'emploi
 app.get("/viewjob", async (req, res) => {
-  if (authcheck.checkCookie(req.cookies.token)) {
     jobs.viewJob(req.query.id).then(jobdata => {
       res.render('viewjob.ejs', {
           job: jobdata,
@@ -200,46 +180,31 @@ app.get("/viewjob", async (req, res) => {
           useremail: req.cookies.token
       });
     })
-  } else {
-    res.redirect("/login")
-  }
 });
 
 // Suppression d'une offre d'emploi
 app.get("/jobdelete", async (req, res) => {
-  if (authcheck.checkCookie(req.cookies.token)) {
     jobs.deleteJob(req.query.id, req.cookies.jwt).then(jobdata => {
       res.redirect("/jobs")
     })
-  } else {
-    res.redirect("/login")
-  }
 });
 
 // Modification d'une offre d'emploi
 app.get("/editjob", async (req, res) => {
-  if (authcheck.checkCookie(req.cookies.token)) {
     jobs.viewJob(req.query.id).then(jobdata => {
       res.render('editjob.ejs', {
           job: jobdata,
           useremail: req.cookies.token
       });
     })
-  } else {
-    res.redirect("/login")
-  }
 });
 
 // Connexion à Strapi
 app.get("/loginjob", async (req, res) => {
-  if (authcheck.checkCookie(req.cookies.token)) {
     res.render("loginjob.ejs", {
       error: "",
       useremail: req.cookies.token
     });
-  } else {
-    res.redirect("/login")
-  }
   }
 );
 
