@@ -257,11 +257,13 @@ app.post("/form", async (req, res, next) => {
       await mail.mainMail(lastname, firstname, birthdate, service, fonction, persontype, needMail, needComputer, needPortableComputer, needPhone, needMobilePhone, req.cookies.token, req.cookies.token2); // Envoie les valeurs du formulaire par email
       
       res.render("newworker.ejs", {
-        mailstatus: "Formulaire envoyé avec succès"
+        mailstatus: "Formulaire envoyé avec succès",
+        useremail: req.cookies.token
       });
     } catch (error) {
       res.render("newworker.ejs", {
-        mailstatus: "Échec de l'envoi"
+        mailstatus: "Échec de l'envoi",
+        useremail: req.cookies.token
       });
 
       console.log(error);
@@ -275,11 +277,13 @@ app.post("/lend", async (req, res, next) => {
     await lendmail.mainMail(req.cookies.token, service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment, req.cookies.token2); // Envoie les valeurs du formulaire par email
 
     res.render("lendhardware.ejs", {
-      mailstatus: "Formulaire envoyé avec succès"
+      mailstatus: "Formulaire envoyé avec succès",
+      useremail: req.cookies.token
     });
   } catch (error) {
     res.render("lendhardware.ejs", {
-      mailstatus: "Échec de l'envoi"
+      mailstatus: "Échec de l'envoi",
+      useremail: req.cookies.token
     });
 
     console.log(error);

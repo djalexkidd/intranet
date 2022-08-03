@@ -1,11 +1,13 @@
 {
   "name": "intranet",
-  "version": "2022.08.01",
+  "version": "2022.08.03",
   "description": "",
   "main": "app.js",
   "scripts": {
     "start": "concurrently \"node app.js\" \"cd strapi/ && NODE_ENV=production npm start\"",
-    "develop": "concurrently \"nodemon app.js\" \"cd strapi/ && npm run develop\""
+    "develop": "concurrently \"nodemon app.js\" \"cd strapi/ && npm run develop\"",
+    "no-strapi": "node app.js",
+    "no-strapi-dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",

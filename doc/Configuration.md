@@ -13,10 +13,7 @@ DOMAIN_NAME=domain.com                      --- Nom de domaine
 WEATHER_APIKEY=0                            --- Clé API de openweathermap.org pour la météo
 
 [FORMULAIRE MAIL]
-SMTP_SERVER=192.168.0.5                     --- Adresse IP du serveur mail
-SMTP_PORT=587                               --- Port du serveur mail
 GLPI_EMAIL=ticket@domain.com                --- Adresse email de destination
-GLPI_SENDER=intranet@domain.com             --- Email de l'envoyeur
 
 [LISTE UTILISATEURS ACTIVE DIRECTORY]
 AD_SERVER=ldap://dc.domain.com              --- Adresse IP de l'Active Directory

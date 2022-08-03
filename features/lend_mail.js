@@ -14,44 +14,33 @@ function isUndefined(element) {
 module.exports = {
     mainMail: async function (demandeur, service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment, smtpPass) {
       const transporter = await nodeMail.createTransport({
-        host: process.env.SMTP_SERVER,
-        port: process.env.SMTP_PORT,
+        service: "Outlook365",
         auth: {
           user: demandeur,
           pass: smtpPass,
         },
       });
       const mailOption = {
-        from: process.env.GLPI_SENDER,
+        from: demandeur,
         to: process.env.GLPI_EMAIL,
         subject: "Demande de prêt",
-        html: `Demandeur: ${demandeur}
-          <br>
-          Service: ${service}
-          <br>
-          Date début prêt: ${lendDateStart}
-          <br>
-          Date fin prêt: ${lendDateEnd}
-          <br>
-          <br>
-          Besoins:
-          <br>
-          PC fixe: ${isUndefined(needComputer)}
-          <br>
-          PC portable: ${isUndefined(needPortableComputer)}
-          <br>
-          Clavier / Souris: ${isUndefined(needKBM)}
-          <br>
-          Écran: ${isUndefined(needScreen)}
-          <br>
-          Casque audio: ${isUndefined(needHeadphones)}
-          <br>
-          Téléphone mobile: ${isUndefined(needMobilePhone)}
-          <br>
-          <br>
-          Commentaires:
-          <br>
-          ${comment}
+        text: `Demandeur: ${demandeur}
+Service: ${service}
+Date début prêt: ${lendDateStart}
+Date fin prêt: ${lendDateEnd}
+
+
+Besoins:
+  PC fixe: ${isUndefined(needComputer)}
+  PC portable: ${isUndefined(needPortableComputer)}
+  Clavier / Souris: ${isUndefined(needKBM)}
+  Écran: ${isUndefined(needScreen)}
+  Casque audio: ${isUndefined(needHeadphones)}
+  Téléphone mobile: ${isUndefined(needMobilePhone)}
+
+
+Commentaires:
+${comment}
           `,
       };
       try {

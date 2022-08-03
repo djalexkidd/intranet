@@ -14,19 +14,14 @@ function isUndefined(element) {
 function isIndirectPerson(persontype, needMail, needComputer, needPortableComputer, needPhone, needMobilePhone) {
   if (persontype === "externe") {
     return `
-    <br>
-    <br>
-    Besoins:
-    <br>
-    Adresse mail: ${isUndefined(needMail)}
-    <br>
-    PC fixe: ${isUndefined(needComputer)}
-    <br>
-    PC portable: ${isUndefined(needPortableComputer)}
-    <br>
-    Téléphone fixe: ${isUndefined(needPhone)}
-    <br>
-    Téléphone mobile: ${isUndefined(needMobilePhone)}`
+
+
+Besoins:
+  Adresse mail: ${isUndefined(needMail)}
+  PC fixe: ${isUndefined(needComputer)}
+  PC portable: ${isUndefined(needPortableComputer)}
+  Téléphone fixe: ${isUndefined(needPhone)}
+  Téléphone mobile: ${isUndefined(needMobilePhone)}`
   }
   else {
     return ""
@@ -37,28 +32,22 @@ function isIndirectPerson(persontype, needMail, needComputer, needPortableComput
 module.exports = {
     mainMail: async function (lastname, firstname, birthdate, service, fonction, persontype, needMail, needComputer, needPortableComputer, needPhone, needMobilePhone, smtpUser, smtpPass) {
       const transporter = await nodeMail.createTransport({
-        host: process.env.SMTP_SERVER,
-        port: process.env.SMTP_PORT,
+        service: "Outlook365",
         auth: {
           user: smtpUser,
           pass: smtpPass,
         },
       });
       const mailOption = {
-        from: process.env.GLPI_SENDER,
+        from: smtpUser,
         to: process.env.GLPI_EMAIL,
         subject: "Nouveau salarié",
-        html: `Nom: ${lastname}
-          <br>
-          Prénom: ${firstname}
-          <br>
-          Date de naissance: ${birthdate}
-          <br>
-          Service: ${service}
-          <br>
-          Fonction: ${fonction}
-          <br>
-          Personne ${persontype}
+        text: `Nom: ${lastname}
+Prénom: ${firstname}
+Date de naissance: ${birthdate}
+Service: ${service}
+Fonction: ${fonction}
+Personne ${persontype}
           ${isIndirectPerson(persontype, needMail, needComputer, needPortableComputer, needPhone, needMobilePhone)}`,
       };
       try {
