@@ -30,7 +30,7 @@ function getAdUser(req) {
          username: req.cookies.token,
          password: req.cookies.token2,
          attributes: {
-          user: ['userPrincipalName', 'cn', 'telephoneNumber', 'otherTelephone', 'title', 'givenName', 'department', 'ipPhone', 'distinguishedName']
+          user: ['userPrincipalName', 'cn', 'telephoneNumber', 'otherTelephone', 'title', 'givenName', 'department', 'ipPhone', 'distinguishedName', 'mail']
         } }
   const ad = new ActiveDirectory(ad_config);
 
@@ -217,9 +217,10 @@ app.get('*', (req, res) => {
 
 // Envoi du formulaire nouveau salarié à partir de la page web
 app.post("/form", async (req, res, next) => {
+  getAdUser(req).findUser(req.cookies.token, async function(err, user) {
     const { lastname, firstname, birthdate, service, fonction, persontype, needMail, needComputer, needPortableComputer, needPhone, needMobilePhone } = req.body; // Charge les données du formulaire
     try {
-      await mail.mainMail(lastname, firstname, birthdate, service, fonction, persontype, needMail, needComputer, needPortableComputer, needPhone, needMobilePhone, req.cookies.token, req.cookies.token2); // Envoie les valeurs du formulaire par email
+      await mail.mainMail(lastname, firstname, birthdate, service, fonction, persontype, needMail, needComputer, needPortableComputer, needPhone, needMobilePhone, req.cookies.token, req.cookies.token2, user.cn, user.mail); // Envoie les valeurs du formulaire par email
       
       res.render("newworker.ejs", {
         mailstatus: "Formulaire envoyé avec succès",
@@ -233,13 +234,15 @@ app.post("/form", async (req, res, next) => {
 
       console.log(error);
     }
+  });
 });
 
 // Envoi du formulaire demande de prêt
 app.post("/lend", async (req, res, next) => {
+  getAdUser(req).findUser(req.cookies.token, async function(err, user) {
   const { service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment } = req.body; // Charge les données du formulaire
   try {
-    await lendmail.mainMail(req.cookies.token, service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment, req.cookies.token2); // Envoie les valeurs du formulaire par email
+    await lendmail.mainMail(req.cookies.token, service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment, req.cookies.token2, user.cn, user.mail); // Envoie les valeurs du formulaire par email
 
     res.render("lendhardware.ejs", {
       mailstatus: "Formulaire envoyé avec succès",
@@ -253,6 +256,7 @@ app.post("/lend", async (req, res, next) => {
 
     console.log(error);
   }
+  });
 });
 
 // Envoi du formulaire de connexion
@@ -269,7 +273,7 @@ app.post('/login', (req, res, next) => {
     if (auth) {
         res.cookie(`token`, userEmail + "@" + process.env.DOMAIN_NAME);
         res.cookie(`token2`, userPassword);
-        console.log('Authenticated!');
+        console.log(userEmail + " s'est connecté !");
         res.redirect('/');
     }
     else {

@@ -12,7 +12,7 @@ function isUndefined(element) {
 
 // Fonction asynchrone pour l'envoi du formulaire
 module.exports = {
-    mainMail: async function (demandeur, service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment, smtpPass) {
+    mainMail: async function (demandeur, service, lendDateStart, lendDateEnd, needComputer, needPortableComputer, needKBM, needScreen, needHeadphones, needMobilePhone, comment, smtpPass, smtpName, smtpMail) {
       const transporter = await nodeMail.createTransport({
         service: "Outlook365",
         auth: {
@@ -21,7 +21,7 @@ module.exports = {
         },
       });
       const mailOption = {
-        from: demandeur,
+        from: smtpName + " <" + smtpMail + ">",
         to: process.env.GLPI_EMAIL,
         subject: "Demande de prêt",
         text: `Demandeur: ${demandeur}

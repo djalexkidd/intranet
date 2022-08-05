@@ -30,7 +30,7 @@ Besoins:
 
 // Fonction asynchrone pour l'envoi du formulaire
 module.exports = {
-    mainMail: async function (lastname, firstname, birthdate, service, fonction, persontype, needMail, needComputer, needPortableComputer, needPhone, needMobilePhone, smtpUser, smtpPass) {
+    mainMail: async function (lastname, firstname, birthdate, service, fonction, persontype, needMail, needComputer, needPortableComputer, needPhone, needMobilePhone, smtpUser, smtpPass, smtpName, smtpMail) {
       const transporter = await nodeMail.createTransport({
         service: "Outlook365",
         auth: {
@@ -39,7 +39,7 @@ module.exports = {
         },
       });
       const mailOption = {
-        from: smtpUser,
+        from: smtpName + " <" + smtpMail + ">",
         to: process.env.GLPI_EMAIL,
         subject: "Nouveau salarié",
         text: `Nom: ${lastname}
