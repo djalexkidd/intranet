@@ -48,6 +48,9 @@
               <th>Téléphone</th>
               <th>Téléphone mobile</th>
               <th>Numéro abrégé</th>
+              <th>Fonction</th>
+              <th>Adresse</th>
+              <th>Ville</th>
               <% for(let i = 0; i < user.length; i++) { %>
                 <tr>
                     <td><%= user[i].cn %></td>
@@ -55,6 +58,9 @@
                     <td><%= user[i].telephoneNumber %></td>
                     <td><%= user[i].otherTelephone %></td>
                     <td><%= user[i].ipPhone %></td>
+                    <td><%= user[i].title %></td>
+                    <td><%= user[i].streetAddress %></td>
+                    <td><%= user[i].l %></td>
                 </tr>
               <% } %>
             </tr>

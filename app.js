@@ -30,7 +30,7 @@ function getAdUser(req) {
          username: req.cookies.token,
          password: req.cookies.token2,
          attributes: {
-          user: ['userPrincipalName', 'cn', 'telephoneNumber', 'otherTelephone', 'title', 'givenName', 'department', 'ipPhone', 'distinguishedName', 'mail']
+          user: ['userPrincipalName', 'cn', 'telephoneNumber', 'otherTelephone', 'title', 'givenName', 'department', 'ipPhone', 'distinguishedName', 'mail', 'streetAddress', 'l']
         } }
   const ad = new ActiveDirectory(ad_config);
 
