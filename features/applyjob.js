@@ -12,7 +12,7 @@ module.exports = {
       });
       const mailOption = {
         from: smtpName + " <" + smtpMail + ">",
-        to: process.env.GLPI_EMAIL,
+        to: process.env.JOB_EMAIL,
         subject: "Proposition candidat",
         text: `Numéro de l'offre: #${offerId}
 Candidat: ${smtpName}

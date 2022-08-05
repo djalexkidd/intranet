@@ -13,7 +13,8 @@ DOMAIN_NAME=domain.com                      --- Nom de domaine
 WEATHER_APIKEY=0                            --- Clé API de openweathermap.org pour la météo
 
 [FORMULAIRE MAIL]
-GLPI_EMAIL=ticket@domain.com                --- Adresse email de destination
+GLPI_EMAIL=ticket@domain.com                --- Adresse email de destination pour les formulaires
+JOB_EMAIL=example@domain.com                --- Adresse email de destination pour les jobs
 
 [LISTE UTILISATEURS ACTIVE DIRECTORY]
 AD_SERVER=ldap://dc.domain.com              --- Adresse IP de l'Active Directory
