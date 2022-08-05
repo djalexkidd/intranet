@@ -31,11 +31,13 @@ main {
     background-color: #3a5693;
 }
 
-p {
+.job-details {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .job {
