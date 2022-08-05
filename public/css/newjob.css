@@ -39,6 +39,10 @@ form {
     flex-direction: column;
 }
 
+.jobname {
+    width: 50%;
+}
+
 textarea {
     height: 500px;
     width: 90%;

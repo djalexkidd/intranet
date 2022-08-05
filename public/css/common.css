@@ -38,6 +38,7 @@ nav .main_pages a
     font-size: 32px;
     font-family: "Roboto", Arial, Helvetica, sans-serif;
     color: white;
+    text-align: center;
 }
 
 /* Change la couleur du bouton au survol */
