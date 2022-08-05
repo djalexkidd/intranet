@@ -41,6 +41,10 @@
 
         <h2>#<%= job.data.id %></h2>
 
+        <% date = new Date(job.data.attributes.createdAt); %>
+
+        <h3><%= date.toLocaleDateString("fr-FR") + " " + date.toLocaleTimeString("fr-FR"); %></h3>
+
         <div class="multiline"><%= job.data.attributes.details %></div>
 
         <% if (strapiStatus) { %>

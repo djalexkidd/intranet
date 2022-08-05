@@ -44,9 +44,12 @@
         <% } %>
 
         <% for(let i = 0; i < job.data.length; i++) { %>
+            <% date = new Date(job.data[i].attributes.createdAt); %>
+
             <div class="job">
                 <h3>#<%= job.data[i].id %></h3>
                 <h2 class="job-title"><%= job.data[i].attributes.name %></h2>
+                <h3 class="job-details"><%= date.toLocaleDateString("fr-FR") + " " + date.toLocaleTimeString("fr-FR"); %></h3>
                 <p class="job-details"><%= job.data[i].attributes.details %></p>
                 <a href="/viewjob?id=<%= job.data[i].id %>">Voir</a>
             </div>
