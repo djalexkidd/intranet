@@ -52,6 +52,8 @@
             <a class="action-button edit" href="/editjob?id=<%= job.data.id %>"><img src="img/edit.png" />Éditer</a>
             <a class="action-button delete" href="/jobdelete?id=<%= job.data.id %>" onclick="return confirm('⚠️ Voulez-vous vraiment supprimer cette offre ?')"><img src="img/plus.png" />Supprimer</a>
         </div>
+        <% } else { %>
+            <a class="action-button edit" href="/applyjob?id=<%= job.data.id %>"><img src="img/edit.png" />Postuler</a>
         <% } %>
     </main>
 

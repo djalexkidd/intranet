@@ -9,6 +9,7 @@ const fs = require("fs");
 // Importation des fonctionnalités du site
 const mail = require("./features/mail");
 const lendmail = require("./features/lend_mail");
+const jobmail = require("./features/applyjob");
 const weather = require("./features/weather")
 const about = require("./features/about")
 const hostlist = require("./features/hoststatus")
@@ -207,6 +208,21 @@ app.get("/loginjob", async (req, res) => {
     });
   }
 );
+
+// Envoi du formulaire demande de prêt
+app.get("/applyjob", async (req, res, next) => {
+  getAdUser(req).findUser(req.cookies.token, async function(err, user) {
+  try {
+    await jobmail.mainMail(req.cookies.token, req.cookies.token2, user.cn, user.mail, req.query.id, user.telephoneNumber); // Envoie les valeurs du formulaire par email
+
+    res.send("Succès");
+  } catch (error) {
+    res.send(error);
+
+    console.log(error);
+  }
+  });
+});
 
 // Page erreur 404
 app.get('*', (req, res) => {
