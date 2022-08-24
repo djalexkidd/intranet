@@ -11,6 +11,11 @@
     src : url('../fonts/Roboto.ttf') format('truetype');
 }
 
+body {
+    background-color: #143058;
+    color: white;
+}
+
 /* Barre de navigation */
 nav 
 {
@@ -56,6 +61,7 @@ nav label, #toggle
 /* Logo du site */
 .logo {
     height: 100px;
+    margin-left: 10px;
 }
 
 /* En-tête */
@@ -70,15 +76,14 @@ header {
     background: #143058;
     color: white;
     font-family: "Roboto", Arial, Helvetica, sans-serif;
-}
-
-.user-control {
     height: 20px;
+    justify-content: end;
 }
 
 .logout {
     color: white;
     margin-left: 25px;
+    margin-right: 25px;
 }
 
 .logout:link {
@@ -125,6 +130,7 @@ header {
     .logo {
         margin-bottom: 20px;
         margin-top: 20px;
+        margin-left: 0px;
     }
 
     header {
