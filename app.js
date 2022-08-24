@@ -209,7 +209,7 @@ app.get("/loginjob", async (req, res) => {
   }
 );
 
-// Envoi du formulaire demande de prêt
+// Envoi d'une demande d'emploi
 app.get("/applyjob", async (req, res, next) => {
   getAdUser(req).findUser(req.cookies.token, async function(err, user) {
   try {
