@@ -1,5 +1,5 @@
 const STRAPI_IP = "http://127.0.0.1:1337/api/jobs/"
-const STRAPI_LOGIN = "http://localhost:1337/api/auth/local/"
+const STRAPI_LOGIN = "http://127.0.0.1:1337/api/auth/local/"
 
 module.exports = {
     dataJobs: async function () {
