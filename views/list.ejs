@@ -38,7 +38,7 @@
     <!-- CONTENU PRINCIPAL -->
     <main>
         <form action="" method="post">
-            <input name="search" placeholder="Rechercher">
+            <input class="search-bar" name="search" placeholder="Rechercher">
             <input class="sendform" type="submit" value="Envoyer" />
         </form>
         <table>
@@ -54,7 +54,7 @@
               <% for(let i = 0; i < user.length; i++) { %>
                 <tr>
                     <td><%= user[i].cn %></td>
-                    <td><%= user[i].userPrincipalName %></td>
+                    <td><%= user[i].mail %></td>
                     <td><%= user[i].telephoneNumber %></td>
                     <td><%= user[i].otherTelephone %></td>
                     <td><%= user[i].ipPhone %></td>
