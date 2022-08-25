@@ -51,6 +51,10 @@ textarea {
     height: 200px;
 }
 
+.otherlink:link, .otherlink:visited {
+    color: rgb(0, 115, 255);
+}
+
 /* Responsive pour la version mobile */
 @media all and (max-width: 991px)
 {
