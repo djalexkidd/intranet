@@ -90,6 +90,10 @@ header {
     text-decoration: underline;
 }
 
+a:link, a:visited {
+    color: white;
+}
+
 /* Responsive pour la version mobile */
 @media all and (max-width: 991px)
 {
