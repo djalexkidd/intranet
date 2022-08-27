@@ -10,9 +10,13 @@ Installez aussi les modules de strapi : ```cd strapi && npm i```
 
 ## Démarrer le serveur
 
-Pour démarrer le serveur entrez dans le terminal : ```npm start```
+Pour démarrer le serveur en mode production entrez dans le terminal : ```npm start```
 
 En mode debug : ```npm run develop```
+
+Mode production sans Strapi : ```npm run no-strapi```
+
+Mode débug sans Strapi : ```npm run no-strapi-dev```
 
 ## Accès au site
 
